@@ -71,7 +71,6 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             reject(result.errors)
           }
           result.data.allAirtableCategories.edges.map(edge => {
-            console.log(edge.node.id + "\nt\n");
             createPage({
               path: `/${_.kebabCase(edge.node.Name)}`,
               component: categoryPage,

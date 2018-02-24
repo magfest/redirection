@@ -8,6 +8,7 @@ export default class CategoryTemplate extends React.Component {
     const category = this.props.pathContext.name;
     const id = this.props.pathContext.id;
     var postEdges = [];
+    console.log(this.props);
     if(this.props.data.allAirtableItems){
       postEdges = this.props.data.allAirtableItems.edges;
     }
@@ -28,7 +29,6 @@ export default class CategoryTemplate extends React.Component {
 export const pageQuery = graphql`
   query CategoryPage($id: String) {
     allAirtableItems(
-      limit: 1000
       sort: { fields: [Name], order: DESC }
       filter: { Category: { eq: $id } }
     ) {
