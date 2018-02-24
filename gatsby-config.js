@@ -28,7 +28,7 @@ module.exports = {
     {
       resolve: "gatsby-source-airtables",
       options: {
-        apiKey: "keyHhUkWbGzxW1Uj5",
+        apiKey: process.env.AIRTABLE_API_KEY,
         baseId: "appavY56wJvBaH9kq",
         tableName: "ITEMS",
         tableView: "Grid view",
@@ -38,7 +38,7 @@ module.exports = {
     {
       resolve: "gatsby-source-airtables",
       options: {
-        apiKey: "keyHhUkWbGzxW1Uj5",
+        apiKey: process.env.AIRTABLE_API_KEY,
         baseId: "appavY56wJvBaH9kq",
         tableName: "CATEGORIES",
         tableView: "Grid view",
