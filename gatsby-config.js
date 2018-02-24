@@ -26,7 +26,7 @@ module.exports = {
       }
     },
     {
-      resolve: "gatsby-source-airtables",
+      resolve: "gatsby-source-airtable",
       options: {
         apiKey: process.env.AIRTABLE_API_KEY,
         baseId: "appavY56wJvBaH9kq",
@@ -36,7 +36,7 @@ module.exports = {
       }
     },
     {
-      resolve: "gatsby-source-airtables",
+      resolve: "gatsby-source-airtable",
       options: {
         apiKey: process.env.AIRTABLE_API_KEY,
         baseId: "appavY56wJvBaH9kq",
