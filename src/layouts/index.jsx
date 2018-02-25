@@ -60,7 +60,9 @@ export default class MainLayout extends React.Component {
         });
         }
     });
-
+    navList.push(<a href="https://app.netlify.com/start/deploy?repository=https://github.com/daredoes/redirection">
+    <ListItem primaryText="Deploy to Netlify"></ListItem>
+    </a>);
 
     return navList;
 
