@@ -54,12 +54,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           allAirtableItems{
             edges{
               node{
-                id,
-                Name,
                 Path,
                 URL,
                 Status,
-                Public,
                 Enabled
               }
             }
@@ -76,15 +73,18 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               component: categoryPage,
               context: {
                 name: edge.node.Name,
-                id: edge.node.id
+                id: edge.node.id,
+                description: edge.node.Description
               }
             });
           });
           result.data.allAirtableItems.edges.map(edge => {
-            createRedirect({
-              fromPath: edge.node.Path,
-              toPath: edge.node.URL
-            });
+            if(edge.node.Enabled){
+              createRedirect({
+                fromPath: edge.node.Path,
+                toPath: edge.node.URL
+              });
+            }
           });
         })
     )

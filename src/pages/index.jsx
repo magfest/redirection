@@ -6,15 +6,38 @@ import config from "../../data/SiteConfig";
 import Link from "gatsby-link";
 
 class Index extends React.Component {
+
+  makeAllComponents(){
+    var all_components = [];
+    this.props.data.allAirtableCategories.edges.forEach(edge => {
+      all_components.push(this.makeComponentListing(edge.node));
+    });
+    return all_components;
+  }
+
+  makeComponentListing(category){
+    var approved_items = [];
+    this.props.data.allAirtableItems.edges.forEach(edge => {
+      if(edge.node.Category.indexOf(category.id) >= 0){
+        approved_items.push(edge.node);
+      }
+    });
+    if(approved_items.length > 0){
+      return <CategoryListing category={category} items={approved_items} key={category.id}/>
+    }
+    return <div></div>
+  }
+
   render() {
-  console.log(this.props);
-    const postEdges = this.props.data.allAirtableCategories.edges;
+    const postEdges = this.makeAllComponents();
     return (
       <div className="index-container">
         <Helmet title={config.siteTitle} />
         {/* Your post list here. */
         postEdges.map(post => (
-          <CategoryListing category={post} id={post.node.id} />
+        <div>
+          {post}
+          </div>
         ))}
       </div>
     );
@@ -34,6 +57,20 @@ export const pageQuery = graphql`
         id,
         Name,
         Description
+      }
+    }
+  },
+  allAirtableItems{
+    edges{
+      node{
+        id,
+        Name,
+        Public,
+        Enabled,
+        URL,
+        Path,
+        Description,
+        Category
       }
     }
   }

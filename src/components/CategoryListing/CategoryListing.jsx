@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "gatsby-link";
+import ItemListing from "../ItemListing/ItemListing";
 
 class CategoryListing extends React.Component {
   getPostList() {
@@ -17,9 +18,10 @@ class CategoryListing extends React.Component {
     //const postList = this.props.data.allAirtableItems.edges;
     return (
     <div>
-      <Link to={this.props.category.node.Name} key={this.props.category.node.id}>
-        <h1>{this.props.category.node.Name}</h1>
+      <Link to={this.props.category.Name} key={this.props.category.id}>
+        <h1>{this.props.category.Name}</h1>
       </Link>
+      <ItemListing itemEdges={this.props.items} />
 
       </div>
     );

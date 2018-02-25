@@ -10,7 +10,9 @@ export default class CategoryTemplate extends React.Component {
     var postEdges = [];
     console.log(this.props);
     if(this.props.data.allAirtableItems){
-      postEdges = this.props.data.allAirtableItems.edges;
+      this.props.data.allAirtableItems.edges.forEach(edge => {
+        postEdges.push(edge.node);
+      });
     }
 
     return (
@@ -37,7 +39,10 @@ export const pageQuery = graphql`
         node {
           id,
           Name,
-          Path
+          Path,
+          URL,
+          Public,
+          Enabled
         }
       }
     }

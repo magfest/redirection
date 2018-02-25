@@ -5,12 +5,9 @@ class ItemListing extends React.Component {
   getPostList() {
     const postList = [];
     this.props.itemEdges.forEach(itemEdge => {
-      postList.push({
-        path: itemEdge.node.Path,
-        id: itemEdge.node.id,
-        name: itemEdge.node.Name
-
-      });
+    if(itemEdge.Public && itemEdge.Enabled){
+        postList.push(itemEdge);
+      }
     });
     return postList;
   }
@@ -20,9 +17,10 @@ class ItemListing extends React.Component {
       <div>
         {/* Your post list here. */
         postList.map(post => (
-          <Link to={post.path} key={post.id}>
-            <h1>{post.name}</h1>
-          </Link>
+
+          <a href={post.URL} key={post.id}>
+            <h1>{post.Name}</h1>
+          </a>
         ))}
       </div>
     );
