@@ -12,8 +12,6 @@ import {
   List,
   ListItem,
   ListItemControl,
-  ExpansionList,
-  ExpansionPanel,
   Checkbox,
   Switch,
 } from 'react-md';

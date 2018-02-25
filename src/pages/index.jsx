@@ -32,16 +32,10 @@ class Index extends React.Component {
   }
 
   render() {
-    const postEdges = this.makeAllComponents();
     return (
     <Layout>
       <Content>
       <ItemTable items={this.props.data.allAirtableItems.edges} categories={this.props.data.allAirtableCategories.edges} />
-      </Content>
-      <Content>
-      <div className="index-container">
-        <Helmet title={config.siteTitle} />
-      </div>
       </Content>
       </Layout>
     );
