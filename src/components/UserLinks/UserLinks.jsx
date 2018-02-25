@@ -24,7 +24,9 @@ class UserLinks extends Component {
     if (!userLinks) {
       return null;
     }
-    return <div className="user-links">{this.getLinkElements()}</div>;
+    return <div className="user-links"><a href="https://app.netlify.com/start/deploy?repository=https://github.com/daredoes/redirection">
+      <img src="https://www.netlify.com/img/deploy/button.svg" title="Deploy to Netlify" />
+    </a>{this.getLinkElements()}</div>;
   }
 }
 

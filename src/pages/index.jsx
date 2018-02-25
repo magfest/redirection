@@ -1,6 +1,7 @@
 import React from "react";
 import Helmet from "react-helmet";
 import CategoryListing from "../components/CategoryListing/CategoryListing";
+import ItemTable from "../components/ItemTable/ItemTable";
 import SEO from "../components/SEO/SEO";
 import config from "../../data/SiteConfig";
 import Link from "gatsby-link";
@@ -35,14 +36,11 @@ class Index extends React.Component {
     return (
     <Layout>
       <Content>
+      <ItemTable items={this.props.data.allAirtableItems.edges} categories={this.props.data.allAirtableCategories.edges} />
+      </Content>
+      <Content>
       <div className="index-container">
         <Helmet title={config.siteTitle} />
-        {/* Your post list here. */
-        postEdges.map(post => (
-        <div>
-          {post}
-          </div>
-        ))}
       </div>
       </Content>
       </Layout>

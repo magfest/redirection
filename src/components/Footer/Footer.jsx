@@ -23,11 +23,10 @@ class Footer extends Component {
           </div>
 
           <div className="rss">
-            <Link to={url}>
-              <Button flat secondary iconClassName="fa fa-rss">
-                Subscribe
-              </Button>
-            </Link>
+            <a href="https://app.netlify.com/start/deploy?repository=https://github.com/daredoes/redirection">
+              <img src="https://www.netlify.com/img/deploy/button.svg" title="Deploy to Netlify" />
+            </a>
+
           </div>
           <div className="based-on">
             <h4>
