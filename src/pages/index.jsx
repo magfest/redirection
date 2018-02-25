@@ -4,6 +4,8 @@ import CategoryListing from "../components/CategoryListing/CategoryListing";
 import SEO from "../components/SEO/SEO";
 import config from "../../data/SiteConfig";
 import Link from "gatsby-link";
+import { Layout, Menu, Breadcrumb } from 'antd';
+const { Header, Content, Footer } = Layout;
 
 class Index extends React.Component {
 
@@ -31,6 +33,8 @@ class Index extends React.Component {
   render() {
     const postEdges = this.makeAllComponents();
     return (
+    <Layout>
+      <Content>
       <div className="index-container">
         <Helmet title={config.siteTitle} />
         {/* Your post list here. */
@@ -40,6 +44,8 @@ class Index extends React.Component {
           </div>
         ))}
       </div>
+      </Content>
+      </Layout>
     );
   }
 }

@@ -72,9 +72,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               path: `/${_.kebabCase(edge.node.Name)}`,
               component: categoryPage,
               context: {
-                name: edge.node.Name,
+                Name: edge.node.Name,
                 id: edge.node.id,
-                description: edge.node.Description
+                Description: edge.node.Description
               }
             });
           });

@@ -2,27 +2,27 @@ import React from "react";
 import Helmet from "react-helmet";
 import config from "../../data/SiteConfig";
 import ItemListing from "../components/ItemListing/ItemListing";
+import CategoryListing from "../components/CategoryListing/CategoryListing";
 
 export default class CategoryTemplate extends React.Component {
-  render() {
-    const category = this.props.pathContext.name;
-    const id = this.props.pathContext.id;
-    var postEdges = [];
-    console.log(this.props);
-    if(this.props.data.allAirtableItems){
-      this.props.data.allAirtableItems.edges.forEach(edge => {
-        postEdges.push(edge.node);
-      });
+
+  makeComponentListing(category){
+    var approved_items = [];
+    this.props.data.allAirtableItems.edges.forEach(edge => {
+        approved_items.push(edge.node);
+    });
+    if(approved_items.length > 0){
+      return <CategoryListing category={category} items={approved_items} key={category.id}/>
     }
+    return <div></div>
+  }
+
+
+  render() {
+    const category = this.props.pathContext;
 
     return (
-      <div className="category-container">
-        <Helmet
-          title={`Posts in category "${category}" | ${config.siteTitle}`}
-        />
-        <h1>{ category } </h1>
-        <ItemListing itemEdges={postEdges} />
-      </div>
+      this.makeComponentListing(category)
     );
   }
 }
