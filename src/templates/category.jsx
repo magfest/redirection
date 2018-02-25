@@ -8,9 +8,11 @@ export default class CategoryTemplate extends React.Component {
 
   makeComponentListing(category){
     var approved_items = [];
+    if(this.props.data.allAirtableItems != null){
     this.props.data.allAirtableItems.edges.forEach(edge => {
         approved_items.push(edge.node);
     });
+    }
     if(approved_items.length > 0){
       return <CategoryListing category={category} items={approved_items} key={category.id}/>
     }
