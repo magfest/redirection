@@ -1,7 +1,8 @@
 import React from "react";
 import Link from "gatsby-link";
 import ItemListing from "../ItemListing/ItemListing";
-import { List } from "antd";
+import { List, Card, Icon, Button } from "antd";
+const { Meta } = Card;
 
 class CategoryListing extends React.Component {
   getPostList() {
@@ -23,12 +24,10 @@ class CategoryListing extends React.Component {
       bordered
       dataSource={this.props.items}
       renderItem={item => (
-        <List.Item>
-          <List.Item.Meta
-           title={<Link to={item.Path}>{item.Name}</Link>}
-           description={<a href={item.URL}>{item.URL}</a>}
-          />
-        </List.Item>
+        <Card actions={[<Button href={item.URL} icon="link">Direct Link</Button>, <Button href={item.Path} icon="book">ShortLink</Button>]}>
+          <Meta title={item.Name} description={item.Description} />
+        </Card>
+
       )}
     />
 
