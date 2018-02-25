@@ -37,6 +37,7 @@ export default class HTML extends React.Component {
           {this.props.headComponents}
           <link rel="shortcut icon" href={favicon} />
           {css}
+          <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
         </head>
         <body>
           <div
