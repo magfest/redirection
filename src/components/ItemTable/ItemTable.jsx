@@ -67,6 +67,9 @@ class ItemTable extends React.Component {
     });
     return filters;
   }
+  onRowClick(e, record){
+    console.log(e.target);
+  }
 
   compareByAlph (a, b) {
    if (a > b) { return -1; }
@@ -79,13 +82,12 @@ class ItemTable extends React.Component {
     sortedInfo = sortedInfo || {};
     filteredInfo = filteredInfo || {};
     const columns = [
-    {title: 'Copy', dataIndex: 'copy', key: 'copy', render: (text, record) => <Button href={record.copy} onClick={this.copyToClipboard} icon='book'></Button>, width: 75, fixed: 'left'},
-    {title: 'Visit', dataIndex: 'id', key: 'id', render: (text, record) => <Button href={record.URL} icon='link'></Button>, width: 75, fixed: 'left'},
-    {title: 'Name', dataIndex: 'name', key: 'name', width: 150,
+    {title: '', dataIndex: 'id', key: 'id', render: (text, record) => <div><Button size='large' href={record.URL} icon='link'></Button><Button href={record.copy} size='large' onClick={this.copyToClipboard} icon='book'></Button></div>, width: 75, fixed: 'left'},
+    {title: 'Name', dataIndex: 'name', key: 'name', width: 300, fixed:'left',
     filters: this.formatFilters(), filteredValue: filteredInfo.name || null,
     defaultSortOrder: 'descend',
     onFilter: (value, record) => record.category_id.indexOf(value) >= 0, sorter: (a, b) => this.compareByAlph(a.name, b.name)},
-    {title: 'URL', dataIndex: 'URL', key: 'URL', render: (text, record) => <a href={record.URL} >{record.URL}</a>, width: 150},
+    {title: 'URL', dataIndex: 'URL', key: 'URL', render: (text, record) => <a href={record.URL} >{record.URL}</a>, width: 500},
     {title: "Description", dataIndex: "description", key: "description"}
 
 
@@ -93,7 +95,12 @@ class ItemTable extends React.Component {
     return (
     <Table
       columns={columns}
-      dataSource={this.formatData()} onChange={this.handleChange} pagination={false} scroll={{x: 1500 }}
+      dataSource={this.formatData()} onChange={this.handleChange} pagination={false} scroll={{x: 1000 }}
+      onRow={(record) => {
+      return {
+        onClick: this.onRowClick
+      }
+      }}
     />
 
 
