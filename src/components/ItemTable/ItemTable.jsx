@@ -71,6 +71,20 @@ class ItemTable extends React.Component {
     console.log(e.target);
   }
 
+  expandedRowRender(record){
+      const data = [{
+      ...record,
+      key: 1
+      }];
+      const columns = [
+      {title: 'URL', dataIndex: 'URL', key: 'URL', render: (text, record) => <a href={record.URL} >{record.URL}</a>, width: 500},
+      {title: "Description", dataIndex: "description", key: "description"}
+
+      ]
+      const showHeader = false;
+      return <Table columns={columns} dataSource={data} showHeader={showHeader}  pagination={false} scroll={{x: 1000 }} size='small'/>
+  }
+
   compareByAlph (a, b) {
    if (a > b) { return -1; }
     if (a < b) { return 1; }
@@ -82,25 +96,24 @@ class ItemTable extends React.Component {
     sortedInfo = sortedInfo || {};
     filteredInfo = filteredInfo || {};
     const columns = [
-    {title: '', dataIndex: 'id', key: 'id', render: (text, record) => <div><Button size='large' href={record.URL} icon='link'></Button><Button href={record.copy} size='large' onClick={this.copyToClipboard} icon='book'></Button></div>, width: 75, fixed: 'left'},
-    {title: 'Name', dataIndex: 'name', key: 'name', width: 300, fixed:'left',
+    {title: 'Name', dataIndex: 'name', key: 'name', width: 300,
     filters: this.formatFilters(), filteredValue: filteredInfo.name || null,
     defaultSortOrder: 'descend',
     onFilter: (value, record) => record.category_id.indexOf(value) >= 0, sorter: (a, b) => this.compareByAlph(a.name, b.name)},
-    {title: 'URL', dataIndex: 'URL', key: 'URL', render: (text, record) => <a href={record.URL} >{record.URL}</a>, width: 500},
-    {title: "Description", dataIndex: "description", key: "description"}
+    {title: '', dataIndex: 'id', key: 'id', render: (text, record) => <div><Button size='large' href={record.URL} icon='link'></Button><Button href={record.copy} size='large' onClick={this.copyToClipboard} icon='book'></Button></div>, width: 1}
 
 
     ];
     return (
     <Table
+      rowKey={record => record.id}
       columns={columns}
-      dataSource={this.formatData()} onChange={this.handleChange} pagination={false} scroll={{x: 1000 }}
+      dataSource={this.formatData()} onChange={this.handleChange} pagination={false}
       onRow={(record) => {
       return {
         onClick: this.onRowClick
       }
-      }}
+      }} expandedRowRender={this.expandedRowRender}
     />
 
 
