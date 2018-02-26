@@ -122,7 +122,7 @@ export default class MainLayout extends React.Component {
 export const pageQuery = graphql`
   query IndexLayoutQuery {
   allAirtableCategories(
-    sort: { fields: [Name], order: DESC }
+    sort: { fields: [Name], order: ASC }
   ) {
     edges {
       node {
@@ -132,7 +132,9 @@ export const pageQuery = graphql`
       }
     }
   },
-  allAirtableItems{
+  allAirtableItems(
+  sort: { fields: [Name], order: ASC }
+  ){
     edges{
       node{
         id,
