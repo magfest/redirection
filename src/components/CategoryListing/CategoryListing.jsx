@@ -37,22 +37,3 @@ class CategoryListing extends React.Component {
 }
 
 export default CategoryListing;
-
-export const pageQuery = graphql`
-  query CategoryListingPage($id: String) {
-    allAirtableItems(
-      limit: 1000
-      sort: { fields: [Name], order: DESC }
-      filter: { Category: { eq: $id } }
-    ) {
-      totalCount
-      edges {
-        node {
-          id,
-          Name,
-          Path
-        }
-      }
-    }
-  }
-`;
