@@ -2,6 +2,8 @@ import React from "react";
 import Helmet from "react-helmet";
 import "font-awesome/scss/font-awesome.scss";
 import Navigation from "../components/Navigation/Navigation";
+import GetNavList from "../components/Navigation/NavList";
+import {Row, Col} from 'antd';
 import config from "../../data/SiteConfig";
 import FontIcon from "react-md/lib/FontIcons";
 import Link from "gatsby-link";
@@ -45,9 +47,18 @@ export default class MainLayout extends React.Component {
     this.props.data.allAirtableItems.edges.forEach(edge => {
       edge.node.Category.map(cat => {
         navCategories[cat].push(
+        <Row>
+        <Col span={12}>
+
+        </Col>
         <a href={edge.node.URL} key={edge.node.URL}>
+        <Col span={12}>
+
         <ListItem
-        primaryText={edge.node.Name} key={edge.node.id} secondaryText={edge.node.Path} /></a>)
+        primaryText={edge.node.Name} key={edge.node.id} secondaryText={edge.node.Path} />
+        </Col></a>
+
+        </Row>)
       });
     });
 
@@ -61,8 +72,12 @@ export default class MainLayout extends React.Component {
         }
     });
     navList.push(<a href="https://app.netlify.com/start/deploy?repository=https://github.com/daredoes/redirection">
-    <ListItem primaryText="Deploy to Netlify"></ListItem>
+    <ListItem primaryText="Deploy to Netlify" leftIcon={<FontIcon forceSize iconClassName='fa fa-rocket' />}></ListItem>
     </a>);
+
+    GetNavList(config).forEach((item) => {
+      navList.push(item);
+    });
 
     return navList;
 
