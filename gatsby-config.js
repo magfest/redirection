@@ -24,13 +24,6 @@ module.exports = {
     "gatsby-plugin-antd",
     "gatsby-plugin-netlify",
     {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "posts",
-        path: `${__dirname}/content/${config.blogPostDir}`
-      }
-    },
-    {
       resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
