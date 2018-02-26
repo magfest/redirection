@@ -3,7 +3,8 @@ import Helmet from "react-helmet";
 import "font-awesome/scss/font-awesome.scss";
 import Navigation from "../components/Navigation/Navigation";
 import GetNavList from "../components/Navigation/NavList";
-import {Row, Col} from 'antd';
+import {Row, Col, Button, notification, message, Popconfirm, Modal} from 'antd';
+const confirm = Modal.confirm;
 import config from "../../data/SiteConfig";
 import FontIcon from "react-md/lib/FontIcons";
 import Link from "gatsby-link";
@@ -17,9 +18,35 @@ import {
   Checkbox,
   Switch,
 } from 'react-md';
-import {CopyToClipboard} from 'react-copy-to-clipboard';
+import copy from 'copy-to-clipboard';
 
 export default class MainLayout extends React.Component {
+
+  copyToClipboardOption(e){
+  const URL_loc = e.target.href;
+  console.log(e.target);
+  confirm({
+    title: "Do you want to copy or visit?",
+    description: e.target.id,
+    cancelText: "Visit URL",
+    okText: "Copy URL",
+    onOk(){
+    if(copy(URL_loc)){
+      notification.success({
+        message: "Copied To Clipboard",
+        description: URL_loc
+      });
+    }
+    },
+    onCancel(){
+    window.open(URL_loc);
+    }
+  });
+  e.preventDefault();
+
+
+  return false;
+  }
 
 
   makeNavItems(){
@@ -36,6 +63,8 @@ export default class MainLayout extends React.Component {
     ];
 
     const categories = {}
+
+
     const navCategories = {
     }
     this.props.data.allAirtableCategories.edges.forEach(edge => {
@@ -47,18 +76,9 @@ export default class MainLayout extends React.Component {
     this.props.data.allAirtableItems.edges.forEach(edge => {
       edge.node.Category.map(cat => {
         navCategories[cat].push(
-        <Row>
-        <Col span={12}>
-
-        </Col>
-        <a href={edge.node.URL} key={edge.node.URL}>
-        <Col span={12}>
-
-        <ListItem
-        primaryText={edge.node.Name} key={edge.node.id} secondaryText={edge.node.Path} />
-        </Col></a>
-
-        </Row>)
+        <ListItem href={edge.node.URL} id={ edge.node.Name } component='a' onClick={this.copyToClipboardOption}
+        primaryText={edge.node.Name} key={edge.node.id}
+        />)
       });
     });
 
