@@ -45,6 +45,7 @@ class ItemTable extends React.Component {
   formatData(){
     const data = [];
     this.props.items.map((item, index) => {
+    if(item.node.Public){
       data.push({
         key: index,
         name: item.node.Name,
@@ -54,6 +55,7 @@ class ItemTable extends React.Component {
         category_id: item.node.Category,
         id: item.node.id
       });
+      }
     });
     return data;
   }
