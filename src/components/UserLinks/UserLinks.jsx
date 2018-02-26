@@ -1,14 +1,22 @@
 import React, { Component } from "react";
-import "./UserLinks.css";
+import Button from "react-md/lib/Buttons";
+import "./UserLinks.scss";
 
 class UserLinks extends Component {
   getLinkElements() {
     const { userLinks } = this.props.config;
     const { labeled } = this.props;
     return userLinks.map(link => (
-      <button key={link.label} href={link.url}>
+      <Button
+        icon={!labeled}
+        flat={labeled}
+        secondary
+        key={link.label}
+        iconClassName={link.iconClassName}
+        href={link.url}
+      >
         {labeled ? link.label : ""}
-      </button>
+      </Button>
     ));
   }
   render() {
@@ -16,7 +24,9 @@ class UserLinks extends Component {
     if (!userLinks) {
       return null;
     }
-    return <div className="user-links">{this.getLinkElements()}</div>;
+    return <div className="user-links"><a href="https://app.netlify.com/start/deploy?repository=https://github.com/daredoes/redirection">
+      <img src="https://www.netlify.com/img/deploy/button.svg" title="Deploy to Netlify" />
+    </a>{this.getLinkElements()}</div>;
   }
 }
 

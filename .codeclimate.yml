@@ -15,6 +15,10 @@ ratings:
     - "**.js"
     - "**.jsx"
     - "**.css"
+    - "**.less"
+    - "**.scss"
+    - "**.sss"
 
 exclude_paths:
 - static/**/*
+- src/templates/b16-tomorrow-dark.css

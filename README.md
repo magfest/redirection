@@ -1,36 +1,32 @@
-[![Code Climate](https://codeclimate.com/github/Vagr9K/gatsby-advanced-starter/badges/gpa.svg)](https://codeclimate.com/github/Vagr9K/gatsby-advanced-starter)
-[![Issue Count](https://codeclimate.com/github/Vagr9K/gatsby-advanced-starter/badges/issue_count.svg)](https://codeclimate.com/github/Vagr9K/gatsby-advanced-starter)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/990fb54ea8094f2aa0ed77f14e859820)](https://www.codacy.com/app/Vagr9K/gatsby-advanced-starter?utm_source=github.com&utm_medium=referral&utm_content=Vagr9K/gatsby-advanced-starter&utm_campaign=Badge_Grade)
+[![Code Climate](https://codeclimate.com/github/Vagr9K/gatsby-material-starter/badges/gpa.svg)](https://codeclimate.com/github/Vagr9K/gatsby-material-starter)
+[![Issue Count](https://codeclimate.com/github/Vagr9K/gatsby-material-starter/badges/issue_count.svg)](https://codeclimate.com/github/Vagr9K/gatsby-material-starter)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/990fb54ea8094f2aa0ed77f14e859820)](https://www.codacy.com/app/Vagr9K/gatsby-material-starter?utm_source=github.com&utm_medium=referral&utm_content=Vagr9K/gatsby-material-starter&utm_campaign=Badge_Grade)
 
 <div align="center">
-    <img src="static/logos/logo-1024.png" alt="Logo" width='200px' height='200px'/>
+    <img src="docs/logo.png" alt="Logo" width='200px' height='200px'/>
 </div>
 
-# Gatsby Advanced Starter
+# Gatsby Material Starter
 
-A blog starter skeleton with advanced features for [Gatsby](https://github.com/gatsbyjs/gatsby/).
+A blog starter with Material design in mind for [Gatsby](https://github.com/gatsbyjs/gatsby/).
 
-## Why?
+[Demo website.](https://vagr9k.github.io/gatsby-material-starter/)
 
-This project aims to provide a minimal for building GatsbyJS powered blogs.
+![Screenshot](docs/screenshot.png)
 
-It doesn't define any UI limitations in any way, and only gives you the basic components for SEO/Social Media/etc.
+## GatsbyJS V1
 
-You are free to use any UI framework/styling options available to you.
+This starter is based on GatsbyJS V1, which brings progressive web app features such as automatic code and data splitting (by route), prefetching, with service worker/offline-first support and PRPL pattern.
 
-NOTE: This project is a stripped down version of [Gatsby Material Starter](https://github.com/Vagr9K/gatsby-material-starter), but will evolve separately.
-
-## How can I use this?
-
-If you are a newcomer to Gatsby who's interested in the implementations of most needed features, this is a great place to start.
-
-If you are interested in a foundation for building ultra-fast websites, you can use this project as a "minimal" starter.
-
-[Demo website.](https://vagr9k.github.io/gatsby-advanced-starter/)
+More information in the [announcement](https://www.gatsbyjs.org/blog/gatsby-first-beta-release/).
 
 ## Features
 
 * Blazing fast loading times thanks to pre-rendered HTML and automatic chunk loading of JS files
+* [React-MD](https://github.com/mlaursen/react-md) for Material design
+  * Integrated FontAwesome support
+  * Integrated Material Icons support
+* SASS/SCSS styling
 * Separate components for everything
 * High configurability:
   * User information
@@ -45,16 +41,18 @@ If you are interested in a foundation for building ultra-fast websites, you can 
   * Follow Me button
 * Posts in Markdown
   * Code syntax highlighting
-  * Embed YouTube videos
-  * Embed Tweets
+  * Embedded YouTube videos
+  * Embedded Tweets
 * Tags
-  * Separate page for posts under each tag
+  * Seprate page for posts under each tag
 * Categories
   * Separate page for posts under each category
+* Suggested posts segment
 * Disqus support
   * Notifications about new disqus comments
 * Google Analytics support
-* NPM scripts for GitHub Pages deployment
+* Responsive design
+  * On mobile, Disqus is loaded only after expanding comments for better performance
 * Social features
   * Twitter tweet button
   * Facebook share/share count
@@ -81,14 +79,19 @@ If you are interested in a foundation for building ultra-fast websites, you can 
   * gh-pages for deploying to GitHub pages
   * CodeClimate configuration file and badge
 
-NOTE: Feel free to check out [Gatsby Material Starter](https://github.com/Vagr9K/gatsby-material-starter) if you are interested in a more opinionated starter with Material Design in mind.
+NOTE: Take a look at [gatsby-advanced-starter](https://github.com/Vagr9K/gatsby-advanced-starter) if you prefer building UI from scratch and/or only interested in fundamental features.
+
+You can also visit [my personal blog](https://vagr9k.me) if you want to see a fully implemented blog based on this starter.
+
+![Article Screenshot](docs/screenshot-article.png)
+![Mobile Screenshot](docs/screenshot-mobile.png)
 
 ## Getting Started
 
 Install this starter (assuming [Gatsby](https://github.com/gatsbyjs/gatsby/) is installed and updated) by running from your CLI:
 
 ```sh
-gatsby new YourProjectName https://github.com/Vagr9K/gatsby-advanced-starter
+gatsby new YourProjectName https://github.com/Vagr9K/gatsby-material-starter
 npm install # or yarn install
 npm run develop # or gatsby develop
 ```
@@ -98,7 +101,7 @@ Or you can fork the project, make your changes there and merge new features when
 Alternatively:
 
 ```sh
-git clone https://github.com/Vagr9K/gatsby-advanced-starter YourProjectName # Clone the project
+git clone https://github.com/Vagr9K/gatsby-material-starter YourProjectName # Clone the project
 cd YourProjectname
 rm -rf .git # So you can have your own changes stored in VCS.
 npm install # or yarn install
@@ -112,18 +115,18 @@ Edit the export object in `data/SiteConfig`:
 ```js
 module.exports = {
   blogPostDir: "sample-posts", // The name of directory that contains your posts.
-  siteTitle: "Gatsby Advanced Starter", // Site title.
-  siteTitleAlt: "GatsbyJS Advanced Starter", // Alternative site title for SEO.
+  siteTitle: "Gatsby Material Starter", // Site title.
+  siteTitleAlt: "GatsbyJS Material Starter", // Alternative site title for SEO.
   siteLogo: "/logos/logo-1024.png", // Logo used for SEO and manifest.
   siteUrl: "https://vagr9k.github.io", // Domain of your website without pathPrefix.
-  pathPrefix: "/gatsby-advanced-starter", // Prefixes all links. For cases when deployed to example.github.io/gatsby-advanced-starter/.
-  siteDescription:
-    "A blog starter skeleton with advanced features for for GatsbyJS", // Website description used for RSS feeds/meta description tag.
+  pathPrefix: "/gatsby-material-starter", // Prefixes all links. For cases when deployed to example.github.io/gatsby-material-starter/.
+  siteDescription: "A GatsbyJS stater with Material design in mind.", // Website description used for RSS feeds/meta description tag.
   siteRss: "/rss.xml", // Path to the RSS file.
   siteFBAppID: "1825356251115265", // FB Application ID for using app insights
-  disqusShortname: "https-vagr9k-github-io-gatsby-advanced-starter", // Disqus shortname.
+  siteGATrackingID: "UA-47311644-4", // Tracking code ID for google analytics.
+  disqusShortname: "https-vagr9k-github-io-gatsby-material-starter", // Disqus shortname.
   postDefaultCategoryID: "Tech", // Default category for posts.
-  userName: "Advanced User", // Username to display in the author segment.
+  userName: "Material User", // Username to display in the author segment.
   userTwitter: "", // Optionally renders "Follow Me" in the UserInfo segment.
   userLocation: "North Pole, Earth", // User location to display in the author segment.
   userAvatar: "https://api.adorable.io/avatars/150/test.png", // User avatar to display in the author segment.
@@ -133,7 +136,7 @@ module.exports = {
   userLinks: [
     {
       label: "GitHub",
-      url: "https://github.com/Vagr9K/gatsby-advanced-starter",
+      url: "https://github.com/Vagr9K/gatsby-material-starter",
       iconClassName: "fa fa-github"
     },
     {
@@ -147,9 +150,7 @@ module.exports = {
       iconClassName: "fa fa-envelope"
     }
   ],
-  copyright: "Copyright © 2017. Advanced User", // Copyright string for the footer of the website and RSS feed.
-  themeColor: "#c62828", // Used for setting manifest and progress theme colors.
-  backgroundColor: "#e0e0e0" // Used for setting manifest background color.
+  copyright: "Copyright © 2017. Material User" // Copyright string for the footer of the website and RSS feed.
 };
 ```
 
@@ -158,8 +159,22 @@ You can also optionally set `pathPrefix`:
 ```js
 module.exports = {
   // Note: it must *not* have a trailing slash.
-  pathPrefix: "/gatsby-advanced-starter" // Prefixes all links. For cases when deployed to example.github.io/gatsby-advanced-starter/.
+  pathPrefix: "/gatsby-material-starter" // Prefixes all links. For cases when deployed to example.github.io/gatsby-material-starter/.
 };
 ```
 
+NOTE: `user*`, `disqusShortname` and `copyright` are optional and won't render if omitted.
+
 WARNING: Make sure to edit `static/robots.txt` to include your domain for the sitemap!
+
+## Theming
+
+Edit `src/layouts/theme.scss` to suit your needs.
+You can use [Material color palette](https://react-md.mlaursen.com/customization/colors) provided by React-MD.
+
+```css
+@import "~react-md/src/scss/react-md";
+$md-primary-color: $md-grey-400;
+$md-secondary-color: $md-red-800;
+$md-tertiary-color: $md-grey-300;
+```

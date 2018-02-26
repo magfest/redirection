@@ -1,31 +1,41 @@
 import React, { Component } from "react";
+import Button from "react-md/lib/Buttons";
 import Link from "gatsby-link";
 import UserLinks from "../UserLinks/UserLinks";
-import "./Footer.css";
+import config from "../../../data/SiteConfig";
+import "./Footer.scss";
 
 class Footer extends Component {
   render() {
-    const { config } = this.props;
     const url = config.siteRss;
+    const { userLinks } = this.props;
     const copyright = config.copyright;
+    const fixedFooter = config.fixedFooter;
     if (!copyright) {
       return null;
     }
     return (
-      <footer className="footer">
-        <UserLinks config={config} labeled />
+      <footer className={fixedFooter ? "footer footer-fixed" : "footer"}>
+        {userLinks ? <UserLinks config={config} labeled /> : null}
         <div className="notice-container">
-          <h4>{copyright}</h4>
+          <div className="copyright">
+            <h4>{copyright}</h4>
+          </div>
 
-          <Link to={url}>
-            <button>Subscribe</button>
-          </Link>
-          <h4>
-            Based on{" "}
-            <a href="https://github.com/Vagr9K/gatsby-advanced-starter">
-              Gatsby Advanced Starter
-            </a>.
-          </h4>
+          <div className="rss">
+            <a href="https://app.netlify.com/start/deploy?repository=https://github.com/daredoes/redirection">
+              <img src="https://www.netlify.com/img/deploy/button.svg" title="Deploy to Netlify" />
+            </a>
+
+          </div>
+          <div className="based-on">
+            <h4>
+              Based on{" "}
+              <a href="https://github.com/Vagr9K/gatsby-material-starter">
+                Gatsby Material Starter
+              </a>.
+            </h4>
+          </div>
         </div>
       </footer>
     );
