@@ -3,32 +3,6 @@ const _ = require("lodash");
 const webpackLodashPlugin = require("lodash-webpack-plugin");
 var webpack = require("webpack");
 
-exports.modifyWebpackConfig = ({ config, stage }) => {
-
-  switch (stage) {
-    case "develop":
-
-      break;
-
-    case "build-css":
-      break;
-
-    case "build-html":
-    config.loader("null", {
-      test: /node_modules/react-onsenui/,
-      loader: "null-loader",
-    });
-
-      break;
-
-    case "build-javascript":
-
-      break;
-  }
-
-  return config;
-};
-
 
 exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
   const { createNodeField } = boundActionCreators;
@@ -103,5 +77,11 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 exports.modifyWebpackConfig = ({ config, stage }) => {
   if (stage === "build-javascript") {
     config.plugin("Lodash", webpackLodashPlugin, null);
+  }
+  if (stage === "build-html") {
+    config.loader("null", {
+      test: /react-onsenui/,
+      loader: "null-loader",
+    });
   }
 };

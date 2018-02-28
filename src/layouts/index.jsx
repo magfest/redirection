@@ -150,6 +150,7 @@ export default class MainLayout extends React.Component {
 
   render() {
     const { children } = this.props;
+    if (typeof window !== `undefined`) {
     return (
       <Page renderToolbar={this.makeOnsenToolbar}>
         <div>
@@ -160,6 +161,11 @@ export default class MainLayout extends React.Component {
         </div>
       </Page>
     );
+    }
+    else{
+    return (<div></div>)
+    }
+
   }
 }
 /* eslint no-undef: "off"*/
