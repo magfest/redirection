@@ -5,9 +5,6 @@ var webpack = require("webpack");
 
 exports.modifyWebpackConfig = ({ config, stage }) => {
 
-  config.plugin("ProvidePlugin", webpack.ProvidePlugin, [{ window: "window"}])
-
-
   switch (stage) {
     case "develop":
 

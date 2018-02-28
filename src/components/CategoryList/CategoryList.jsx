@@ -4,7 +4,9 @@ import Link from "gatsby-link";
 import PropTypes from 'prop-types';
 
 import ItemListItem from "../ItemListItem/ItemListItem";
-import { List, ListItem, ListHeader } from 'react-onsenui';
+if (typeof window !== `undefined`) {
+  import { List, ListItem, ListHeader } from 'react-onsenui';
+}
 
 
 class CategoryList extends React.Component {
