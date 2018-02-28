@@ -22,11 +22,13 @@ export default class MainLayout extends React.Component {
       <Helmet>
         <meta name="description" content={config.siteDescription} />
       </Helmet>
+      <Layout>
       <DHeader>
       </DHeader>
         <Content style={{ marginTop: 64 }}>
           {children()}
         </Content>
+        </Layout>
       </Layout>
     );
   }

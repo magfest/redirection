@@ -9,4 +9,21 @@
   background-color: $md-tertiary-color;
   text-align: center;
   font-size: 2em;
+  position: fixed;
+  width: 100%;
+  padding: 0;
+}
+
+.icon{
+  float: left;
+  position: absolute;
+  left:10px;
+  color: $md-secondary-color;
+  height: 100%;
+  margin-top: 20px;
+  margin-bottom: auto;
+}
+
+.icon:hover{
+  color: darken($md-secondary-color, 10%);
 }
