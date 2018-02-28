@@ -6,9 +6,7 @@ import Navigation from "../components/Navigation/Navigation";
 import GetNavList from "../components/Navigation/NavList";
 import CategoryList from "../components/CategoryList/CategoryList";
 
-if (typeof window !== `undefined`) {
-  import { Page, Toolbar, ToolbarButton, Icon } from 'react-onsenui';
-}
+import { Page, Toolbar, ToolbarButton, Icon } from 'react-onsenui';
 
 import {Row, Col, Button, notification, message, Popconfirm, Modal} from 'antd';
 const confirm = Modal.confirm;

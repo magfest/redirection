@@ -5,9 +5,8 @@ import PropTypes from 'prop-types';
 import copy from 'copy-to-clipboard';
 import {notification} from 'antd';
 
-if (typeof window !== `undefined`) {
-  import { List, ListItem, ListHeader, Button, ActionSheet, ActionSheetButton } from 'react-onsenui';
-}
+
+import { List, ListItem, ListHeader, Button, ActionSheet, ActionSheetButton } from 'react-onsenui';
 
 class ItemListItem extends React.Component {
 

@@ -14,9 +14,10 @@ exports.modifyWebpackConfig = ({ config, stage }) => {
       break;
 
     case "build-html":
-    config.merge({
-      target: "web"
-    })
+    config.loader("null", {
+      test: /react-onsenui/,
+      loader: "null-loader",
+    });
 
       break;
 
