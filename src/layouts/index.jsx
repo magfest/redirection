@@ -115,7 +115,7 @@ export default class MainLayout extends React.Component {
 
   render() {
     const { children } = this.props;
-    if (typeof window === `undefined`) return;
+    if (typeof window === `undefined`) return(<div></div>);
     return (
       <Page renderToolbar={this.makeOnsenToolbar}>
         <div>

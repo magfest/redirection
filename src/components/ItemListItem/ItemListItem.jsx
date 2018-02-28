@@ -41,7 +41,7 @@ class ItemListItem extends React.Component {
 
   }
   render() {
-    if (typeof window === `undefined`) return;
+    if (typeof window === `undefined`) return(<div></div>);
     return (
 
     <ListItem key={this.props.item.node.id} tappable={true} onClick={this.clicked}>
