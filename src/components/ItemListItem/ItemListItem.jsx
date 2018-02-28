@@ -41,8 +41,9 @@ class ItemListItem extends React.Component {
 
   }
   render() {
-    return (
     if (typeof window === `undefined`) return;
+    return (
+
     <ListItem key={this.props.item.node.id} tappable={true} onClick={this.clicked}>
     { this.props.item.node.Name}
     <ActionSheet isOpen={this.state.isOpen} animation='default' onCancel={this.handleCancel} isCancelable={true} title={'Options'} >
