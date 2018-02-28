@@ -12,18 +12,19 @@
   position: fixed;
   width: 100%;
   padding: 0;
+  z-index: 10;
 }
 
 .icon{
   float: left;
   position: absolute;
   left:10px;
-  color: $md-secondary-color;
+  color: $md-link-color;
   height: 100%;
   margin-top: 20px;
   margin-bottom: auto;
 }
 
 .icon:hover{
-  color: darken($md-secondary-color, 10%);
+  color: darken($md-link-color, 10%);
 }
