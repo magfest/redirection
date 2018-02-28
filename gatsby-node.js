@@ -2,6 +2,7 @@ const path = require("path");
 const _ = require("lodash");
 const webpackLodashPlugin = require("lodash-webpack-plugin");
 var webpack = require("webpack");
+const path = require('path');
 
 exports.modifyWebpackConfig = ({ config, stage }) => {
 
@@ -15,11 +16,7 @@ exports.modifyWebpackConfig = ({ config, stage }) => {
 
     case "build-html":
     config.loader("null", {
-      test: /react-onsenui/,
-      loader: "null-loader",
-    });
-    config.loader("null", {
-      test: /onsenui/,
+      test: path.resolve(__dirname, 'node_modules/react-onsenui/react-onsenui.js'),
       loader: "null-loader",
     });
 
