@@ -41,8 +41,6 @@ export default class HTML extends React.Component {
           {css}
           <link rel="stylesheet" href="/css/onsenui.css" />
           <link rel="stylesheet" href="/css/onsen-css-components.css" />
-          <script src="/js/onsenui.min.js"></script>
-          <script src="/js/react-onsenui.js"></script>
         </head>
         <body>
           <div
