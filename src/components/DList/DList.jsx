@@ -20,9 +20,12 @@ class DList extends Component{
 
 
     renderItem = (item) => {
+    if(item.Public){
       return(
       <DListItem item={item} modal={this.makeModal} />
       );
+      }
+    return (<div></div>);
     }
 
     makeModal = (title, url, bookmark) => {
