@@ -18,6 +18,10 @@ exports.modifyWebpackConfig = ({ config, stage }) => {
       test: /react-onsenui/,
       loader: "null-loader",
     });
+    config.loader("null", {
+      test: /onsenui/,
+      loader: "null-loader",
+    });
 
       break;
 
