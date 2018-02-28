@@ -28,6 +28,7 @@ class CategoryList extends React.Component {
 
   render() {
     return (
+    if (typeof window === `undefined`) return;
     <List
       dataSource={this.props.items}
       renderRow={this.renderRow}
