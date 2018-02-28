@@ -5,7 +5,6 @@ import Navigation from "../components/Navigation/Navigation";
 import GetNavList from "../components/Navigation/NavList";
 import CategoryList from "../components/CategoryList/CategoryList";
 
-import { Page, Toolbar, ToolbarButton, Icon } from 'react-onsenui';
 
 import {Row, Col, Button, notification, message, Popconfirm, Modal} from 'antd';
 const confirm = Modal.confirm;
@@ -20,14 +19,14 @@ export default class MainLayout extends React.Component {
 
   makeOnsenToolbar(){
     return (
-      <Toolbar>
+      <Ons.Toolbar>
       <div className="center">Redirection</div>
       <div className="right">
-        <ToolbarButton>
-          <Icon icon='ion-navicon, material:md-menu'></Icon>
-        </ToolbarButton>
+        <Ons.ToolbarButton>
+          <Ons.Icon icon='ion-navicon, material:md-menu'></Ons.Icon>
+        </Ons.ToolbarButton>
         </div>
-      </Toolbar>
+      </Ons.Toolbar>
     );
   }
 

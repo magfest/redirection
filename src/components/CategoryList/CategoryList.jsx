@@ -1,8 +1,6 @@
 import React from "react";
 import Link from "gatsby-link";
 import PropTypes from 'prop-types';
-
-import { List, ListItem, ListHeader, Button } from 'react-onsenui';
 import ItemListItem from "../ItemListItem/ItemListItem";
 
 class CategoryList extends React.Component {
@@ -16,7 +14,7 @@ class CategoryList extends React.Component {
   }
 
   renderHeader = () => {
-    return (<ListHeader key={this.props.category.node.id}>{this.props.category.node.Name}</ListHeader>);
+    return (<Ons.ListHeader key={this.props.category.node.id}>{this.props.category.node.Name}</Ons.ListHeader>);
   }
 
 
@@ -25,7 +23,7 @@ class CategoryList extends React.Component {
 
   render() {
     return (
-    <List
+    <Ons.List
       dataSource={this.props.items}
       renderRow={this.renderRow}
       renderHeader={this.renderHeader}
