@@ -8,64 +8,16 @@ class DList extends Component{
 
   constructor(props){
     super(props);
-    this.state ={
-    modalTitle: "Test",
-    modalURL: "http://daredoes.work",
-    modalPath: "http://daredoes.work/test",
-    modalVisible: false
-
-    }
   }
 
-
-
     renderItem = (item) => {
-    if(item.Public){
       return(
-      <DListItem item={item} modal={this.makeModal} />
+      <DListItem item={item} modal={this.props.modal} />
       );
-      }
-    return (<div></div>);
     }
-
-    makeModal = (title, url, bookmark) => {
-    console.log(url);
-      this.setState({
-        modalTitle: title,
-        modalURL: url,
-        modalPath: bookmark,
-        modalVisible: true,
-      });
-
-
-    }
-
-    hide = () => {
-    this.setState({ modalVisible: false });
-  };
-
-    modalOk = () => {
-    console.log(this.state);
-      if(copy(this.state.modalPath))
-      {
-        notification.success({
-        message: "URL Copied",
-        description: this.state.modalPath
-        });
-      }
-    }
-
-    modalCancel = () => {
-      window.open(this.state.modalURL);
-    }
-
 
     render(){
-    const actions = [];
-    actions.push({ dashed: true, iconClassName: "fa fa-link", children: 'Visit', onClick: this.modalCancel });
-    actions.push({ dashed: true, iconClassName: "fa fa-clipboard", children: 'Copy', onClick: this.modalOk });
     return(
-    <div>
     <List
     bordered
     dataSource={this.props.items}
@@ -74,17 +26,6 @@ class DList extends Component{
 
 
     </List>
-    <DialogContainer
-    id='copy-dialog'
-    visible={this.state.modalVisible}
-    onHide={this.hide}
-    actions={actions}
-    title={this.state.modalTitle}
-    >
-    { this.state.modalURL}
-
-    </DialogContainer>
-    </div>
     );
     }
 

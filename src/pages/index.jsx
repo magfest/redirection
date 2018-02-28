@@ -14,7 +14,7 @@ class Index extends React.Component {
 
   makeAllComponents(){
     var all_components = [];
-    this.props.data.allAirtableCategories.edges.forEach(edge => {
+    this.context.categories.edges.forEach(edge => {
     const node = this.makeComponentListing(edge.node);
     if(node != null){
       all_components.push(node);
@@ -23,16 +23,18 @@ class Index extends React.Component {
     return all_components;
   }
 
-  makeComponentListing(category){
+  makeComponentListing = (category) => {
     var approved_items = [];
-    this.props.data.allAirtableItems.edges.forEach(edge => {
-      if(edge.node.Category.indexOf(category.id) >= 0){
-        approved_items.push(edge.node);
+    this.context.items.edges.forEach(edge => {
+      if(edge.node.Category){
+        if(edge.node.Category.indexOf(category.id) >= 0){
+          approved_items.push(edge.node);
+        }
       }
     });
     if(approved_items.length > 0){
       return (<TabPane tab={category.Name} key={category.id}>
-            <DList category={category} items={approved_items} />
+            <DList category={category} items={approved_items} modal={this.context.modal} />
             </TabPane>)
     }
     return null;
@@ -51,35 +53,10 @@ class Index extends React.Component {
   }
 }
 
-export default Index;
-
-/* eslint no-undef: "off"*/
-export const pageQuery = graphql`
-  query IndexQuery {
-  allAirtableCategories(
-    sort: { fields: [Name], order: DESC }
-  ) {
-    edges {
-      node {
-        id,
-        Name,
-        Description
-      }
-    }
-  },
-  allAirtableItems{
-    edges{
-      node{
-        id,
-        Name,
-        Public,
-        Enabled,
-        URL,
-        Path,
-        Description,
-        Category
-      }
-    }
-  }
+Index.contextTypes = {
+  modal: React.PropTypes.func,
+  items: React.PropTypes.object,
+  categories: React.PropTypes.object
 }
-`;
+
+export default Index;

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Helmet from "react-helmet";
-import { Layout, Icon } from 'antd';
+import { Layout } from 'antd';
+import {Button } from 'react-md';
 const { Header } = Layout;
 import config from "../../../data/SiteConfig";
 import copy from 'copy-to-clipboard';
@@ -10,9 +11,10 @@ class DHeader extends Component{
 
 
     render(){
+    console.log(this.props);
     return(
     <Header className="header">
-    <Icon type="ellipsis" className="icon"/>
+    <Button icon className="icon" iconClassName="fa fa-bars" onClick={this.props.popSider}></Button>
     Redirection
     </Header>
     );

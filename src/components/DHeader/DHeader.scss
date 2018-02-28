@@ -20,11 +20,11 @@
   position: absolute;
   left:10px;
   color: $md-link-color;
-  height: 100%;
-  margin-top: 20px;
-  margin-bottom: auto;
+  height: auto !important;
+  @extend .link, .bubble;
+  padding-bottom: 0;
 }
 
-.icon:hover{
-  color: darken($md-link-color, 10%);
+.md-btn--icon {
+  padding: 0 !important;
 }
