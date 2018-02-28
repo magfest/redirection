@@ -5,6 +5,7 @@ import copy from 'copy-to-clipboard';
 import {notification} from 'antd';
 
 
+import { List, ListItem, ListHeader, Button, ActionSheet, ActionSheetButton } from 'react-onsenui';
 
 class ItemListItem extends React.Component {
 
@@ -20,6 +21,8 @@ class ItemListItem extends React.Component {
   }
 
   handleCopy = () => {
+    const elem = <a href={this.props.item.node.Path}></a>;
+    console.log(elem.href);
     if(copy(this.props.item.node.Path)){
       notification.success({
         message: "Copied To Clipboard",
@@ -38,14 +41,14 @@ class ItemListItem extends React.Component {
   }
   render() {
     return (
-    <Ons.ListItem key={this.props.item.node.id} tappable={true} onClick={this.clicked}>
+    <ListItem key={this.props.item.node.id} tappable={true} onClick={this.clicked}>
     { this.props.item.node.Name}
-    <Ons.ActionSheet isOpen={this.state.isOpen} animation='default' onCancel={this.handleCancel} isCancelable={true} title={'Options'} >
-    <Ons.ActionSheetButton onClick={this.handleCopy}>Copy URL</Ons.ActionSheetButton>
-    <Ons.ActionSheetButton onClick={this.handleVisit}>Visit URL</Ons.ActionSheetButton>
-    <Ons.ActionSheetButton onClick={this.handleCancel} icon={'md-close'}>Cancel</Ons.ActionSheetButton>
-    </Ons.ActionSheet>
-    </Ons.ListItem>
+    <ActionSheet isOpen={this.state.isOpen} animation='default' onCancel={this.handleCancel} isCancelable={true} title={'Options'} >
+    <ActionSheetButton onClick={this.handleCopy}>Copy URL</ActionSheetButton>
+    <ActionSheetButton onClick={this.handleVisit}>Visit URL</ActionSheetButton>
+    <ActionSheetButton onClick={this.handleCancel} icon={'md-close'}>Cancel</ActionSheetButton>
+    </ActionSheet>
+    </ListItem>
         );
   }
 }
