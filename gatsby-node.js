@@ -2,6 +2,32 @@ const path = require("path");
 const _ = require("lodash");
 const webpackLodashPlugin = require("lodash-webpack-plugin");
 
+exports.modifyWebpackConfig = ({ config, stage }) => {
+
+
+  switch (stage) {
+    case "develop":
+
+      break;
+
+    case "build-css":
+      break;
+
+    case "build-html":
+    config.merge({
+      target: "web"
+    })
+
+      break;
+
+    case "build-javascript":
+
+      break;
+  }
+
+  return config;
+};
+
 
 exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
   const { createNodeField } = boundActionCreators;
