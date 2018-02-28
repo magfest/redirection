@@ -1,7 +1,0 @@
-[build]
-  command = "gatsby build"
-  publish = "public"
-
-[context.branch-deploy]
-  command = "gastby build"
-  publish = "public"
