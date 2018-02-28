@@ -110,8 +110,6 @@ export default class MainLayout extends React.Component {
 
     return navList;
 
-
-
   }
 
   getLocalTitle() {
