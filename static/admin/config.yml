@@ -1,0 +1,7 @@
+backend:
+  name: github
+  repo: daredoes/redirection
+  branch: cms
+
+media_folder: static/assets
+public_folder: assets
