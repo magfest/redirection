@@ -1,6 +1,6 @@
 import React from "react";
 import Helmet from "react-helmet";
-import CategoryListing from "../components/CategoryListing/CategoryListing";
+import CategoryList from "../components/CategoryList/CategoryList";
 import ItemTable from "../components/ItemTable/ItemTable";
 import SEO from "../components/SEO/SEO";
 import config from "../../data/SiteConfig";
@@ -31,13 +31,38 @@ class Index extends React.Component {
     return <div></div>
   }
 
+  makeLists(){
+    const dataSources = {};
+    this.props.data.allAirtableCategories.edges.forEach(edge => {
+      dataSources[edge.node.id] = {
+      category: edge,
+      items: []
+      }
+    });
+
+    this.props.data.allAirtableItems.edges.forEach(edge => {
+      if(edge.node.Category){
+        edge.node.Category.map(id => {
+          dataSources[id].items.push(edge);
+        });
+      }
+    });
+    const itemsToReturn = [];
+    for(var key in dataSources){
+      if(dataSources[key].items.length > 0){
+        itemsToReturn.push(<CategoryList category={dataSources[key].category} items={dataSources[key].items} />);
+        }
+    }
+    return itemsToReturn;
+  }
+
   render() {
+  const components = this.makeLists().map(item => {
+  return item;
+  });
     return (
-    <Layout>
-      <Content>
-      <ItemTable items={this.props.data.allAirtableItems.edges} categories={this.props.data.allAirtableCategories.edges} />
-      </Content>
-      </Layout>
+    <div>{components}
+    </div>
     );
   }
 }
@@ -48,7 +73,7 @@ export default Index;
 export const pageQuery = graphql`
   query IndexQuery {
   allAirtableCategories(
-    sort: { fields: [Name], order: DESC }
+    sort: { fields: [Name], order: ASC }
   ) {
     edges {
       node {
@@ -58,7 +83,9 @@ export const pageQuery = graphql`
       }
     }
   },
-  allAirtableItems{
+  allAirtableItems(
+  sort: { fields: [Name], order: ASC }
+  ){
     edges{
       node{
         id,

@@ -3,6 +3,10 @@ import Helmet from "react-helmet";
 import "font-awesome/scss/font-awesome.scss";
 import Navigation from "../components/Navigation/Navigation";
 import GetNavList from "../components/Navigation/NavList";
+import CategoryList from "../components/CategoryList/CategoryList";
+
+import { Page, Toolbar, ToolbarButton, Icon } from 'react-onsenui';
+
 import {Row, Col, Button, notification, message, Popconfirm, Modal} from 'antd';
 const confirm = Modal.confirm;
 import config from "../../data/SiteConfig";
@@ -10,17 +14,22 @@ import FontIcon from "react-md/lib/FontIcons";
 import Link from "gatsby-link";
 import "./index.scss";
 import "./global.scss";
-import {
-  Avatar,
-  List,
-  ListItem,
-  ListItemControl,
-  Checkbox,
-  Switch,
-} from 'react-md';
 import copy from 'copy-to-clipboard';
 
 export default class MainLayout extends React.Component {
+
+  makeOnsenToolbar(){
+    return (
+      <Toolbar>
+      <div className="center">Redirection</div>
+      <div className="right">
+        <ToolbarButton>
+          <Icon icon='ion-navicon, material:md-menu'></Icon>
+        </ToolbarButton>
+        </div>
+      </Toolbar>
+    );
+  }
 
   copyToClipboardOption(e){
   const URL_loc = e.target.href;
@@ -139,17 +148,18 @@ export default class MainLayout extends React.Component {
     }
     return title;
   }
+
   render() {
     const { children } = this.props;
     return (
-      <Navigation config={config} navItems={this.makeNavItems()} LocalTitle={this.getLocalTitle()}>
+      <Page renderToolbar={this.makeOnsenToolbar}>
         <div>
           <Helmet>
-            <meta name="description" content={config.siteDescription} />
+          <meta name="description" content={config.siteDescription} />
           </Helmet>
           {children()}
         </div>
-      </Navigation>
+      </Page>
     );
   }
 }

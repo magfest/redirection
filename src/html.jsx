@@ -4,6 +4,7 @@
 import React from "react";
 import favicon from "./favicon.png";
 
+
 let inlinedStyles = "";
 if (process.env.NODE_ENV === "production") {
   try {
@@ -36,7 +37,10 @@ export default class HTML extends React.Component {
           />
           {this.props.headComponents}
           <link rel="shortcut icon" href={favicon} />
+
           {css}
+          <link rel="stylesheet" href="/css/onsenui.css" />
+          <link rel="stylesheet" href="/css/onsen-css-components.css" />
         </head>
         <body>
           <div
