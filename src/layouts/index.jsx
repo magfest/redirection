@@ -94,6 +94,8 @@ export default class MainLayout extends React.Component {
         onHide={this.hide}
         actions={actions}
         title={this.state.modalTitle}
+        height={'100vh'}
+        width={'100vw'}
         >
         { this.state.modalURL}
 
