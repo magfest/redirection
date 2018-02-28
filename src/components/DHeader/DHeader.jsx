@@ -11,7 +11,6 @@ class DHeader extends Component{
 
 
     render(){
-    console.log(this.props);
     return(
     <Header className="header">
     <Button icon className="icon" iconClassName="fa fa-bars" onClick={this.props.popSider}></Button>

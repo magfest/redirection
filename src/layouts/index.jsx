@@ -3,7 +3,7 @@ import Helmet from "react-helmet";
 import "font-awesome/scss/font-awesome.scss";
 import DHeader from "../components/DHeader/DHeader";
 import DSider from "../components/DSider/DSider";
-import { Layout } from 'antd';
+import { Layout, notification } from 'antd';
 const { Content } = Layout;
 import config from "../../data/SiteConfig";
 import FontIcon from "react-md/lib/FontIcons";
@@ -22,15 +22,19 @@ export default class MainLayout extends React.Component {
       modalTitle: "Test",
       modalURL: "http://daredoes.work",
       modalPath: "http://daredoes.work/test",
-      modalVisible: false
+      modalVisible: false,
+      closeOnClick: true
     };
   }
 
   toggleSider = () => {
-  console.log('toggle');
     this.setState({
       showSider: !this.state.showSider
     });
+  }
+
+  closeSider = () => {
+    if(this.state.closeOnClick && this.state.showSider) this.toggleSider();
   }
 
 
@@ -67,6 +71,7 @@ export default class MainLayout extends React.Component {
   }
 
 
+
   render() {
   const {children} = this.props;
   const actions = [];
@@ -78,7 +83,8 @@ export default class MainLayout extends React.Component {
         <meta name="description" content={config.siteDescription} />
       </Helmet>
       { this.state.showSider ? <DSider modal={this.makeModal} categories={this.props.data.categories} items={this.props.data.items} /> : null}
-      <Layout style={{ marginLeft: this.state.showSider ? 200 : 0}}>
+      <Layout className={'page ' + (this.state.closeOnClick && this.state.showSider ? " click" : "")} onClick={this.closeSider} style={{ marginLeft: this.state.showSider ? 200 : 0, height: '100vh'}}>
+
       <DHeader modal={this.makeModal} popSider={this.toggleSider}>
       </DHeader>
         <Content style={{ marginTop: 64 }}>
