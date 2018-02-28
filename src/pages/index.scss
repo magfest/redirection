@@ -3,3 +3,16 @@
 .ant-tabs-top > .ant-tabs-bar {
   margin-bottom: 0;
 }
+
+.ant-tabs-bar{
+  position: fixed;
+  width: 100%;
+  left:0;
+  z-index: 1;
+  background-color: $md-secondary-color;
+}
+
+.ant-tabs-content{
+  width: 100%;
+  margin-top: 43.5px;
+}

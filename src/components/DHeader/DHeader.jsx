@@ -11,7 +11,7 @@ class DHeader extends Component{
 
     render(){
     return(
-    <Header className="header">
+    <Header className="header" style={{ position: 'fixed', width: '100%' }}>
     Redirection
     </Header>
     );

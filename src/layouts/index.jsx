@@ -24,7 +24,7 @@ export default class MainLayout extends React.Component {
       </Helmet>
       <DHeader>
       </DHeader>
-        <Content>
+        <Content style={{ marginTop: 64 }}>
           {children()}
         </Content>
       </Layout>
