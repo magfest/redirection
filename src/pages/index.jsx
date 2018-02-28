@@ -6,6 +6,7 @@ import SEO from "../components/SEO/SEO";
 import config from "../../data/SiteConfig";
 import Link from "gatsby-link";
 import { Layout, Menu, Breadcrumb } from 'antd';
+import { Flex, Drawer, List, NavBar, Icon } from 'antd-mobile';
 const { Header, Content, Footer } = Layout;
 
 class Index extends React.Component {
@@ -33,11 +34,18 @@ class Index extends React.Component {
 
   render() {
     return (
-    <Layout>
-      <Content>
-      <ItemTable items={this.props.data.allAirtableItems.edges} categories={this.props.data.allAirtableCategories.edges} />
-      </Content>
-      </Layout>
+    <Flex>
+    <NavBar icon={<Icon type="ellipsis" />} >Basic</NavBar>
+      <Drawer
+        className="my-drawer"
+        style={{ minHeight: document.documentElement.clientHeight }}
+        enableDragHandle
+        contentStyle={{ color: '#A6A6A6', textAlign: 'center', paddingTop: 42 }}
+      >
+        Click upper-left corner
+      </Drawer>
+
+    </Flex>
     );
   }
 }
