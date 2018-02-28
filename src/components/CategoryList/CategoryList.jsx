@@ -3,8 +3,9 @@ import ReactDOM from "react-dom";
 import Link from "gatsby-link";
 import PropTypes from 'prop-types';
 
-import { List, ListItem, ListHeader } from 'react-onsenui';
 import ItemListItem from "../ItemListItem/ItemListItem";
+import { List, ListItem, ListHeader } from 'react-onsenui';
+
 
 class CategoryList extends React.Component {
 

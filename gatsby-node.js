@@ -1,8 +1,13 @@
 const path = require("path");
 const _ = require("lodash");
 const webpackLodashPlugin = require("lodash-webpack-plugin");
+var nodeExternals = require('webpack-node-externals');
 
 exports.modifyWebpackConfig = ({ config, stage }) => {
+  config.merge({
+    target: "node",
+    externals: [nodeExternals()]
+  })
 
 
   switch (stage) {
@@ -14,9 +19,7 @@ exports.modifyWebpackConfig = ({ config, stage }) => {
       break;
 
     case "build-html":
-    config.merge({
-      target: "web"
-    })
+
 
       break;
 
