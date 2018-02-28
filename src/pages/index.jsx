@@ -57,6 +57,7 @@ class Index extends React.Component {
   }
 
   render() {
+  if (typeof window === `undefined`) return;
   const components = this.makeLists().map(item => {
   return item;
   });
