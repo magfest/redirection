@@ -8,16 +8,12 @@ class DListItem extends Component{
 
     constructor(props){
     super(props);
-    const new_url = window.location.origin + props.item.Path
-    this.state = {
-      url: new_url
-    }
 
     }
 
     handleClick = (e) => {
-      
-      this.props.modal(this.props.item.Name, this.props.item.URL, this.state.url);
+      const new_url = window.location.origin + props.item.Path;
+      this.props.modal(this.props.item.Name, this.props.item.URL, new_url);
     }
 
 
