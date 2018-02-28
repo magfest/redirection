@@ -59,8 +59,8 @@ class DList extends Component{
 
     render(){
     const actions = [];
-    actions.push({ secondary: true, children: 'Visit', onClick: this.modalCancel });
-    actions.push({ secondary: true, children: 'Copy', onClick: this.modalOk });
+    actions.push({ dashed: true, iconClassName: "fa fa-link", children: 'Visit', onClick: this.modalCancel });
+    actions.push({ dashed: true, iconClassName: "fa fa-clipboard", children: 'Copy', onClick: this.modalOk });
     return(
     <div>
     <List
@@ -78,6 +78,7 @@ class DList extends Component{
     actions={actions}
     title={this.state.modalTitle}
     >
+    { this.state.modalURL}
 
     </DialogContainer>
     </div>
