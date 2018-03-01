@@ -66,6 +66,12 @@ export default class MainLayout extends React.Component {
         window.open(this.state.modalURL);
       }
 
+  closeModal = () => {
+    this.setState({
+      modalVisible: false
+    });
+  }
+
   getChildContext = () => {
     return {modal: this.makeModal, items: this.props.data.items, categories: this.props.data.categories};
   }
@@ -75,8 +81,10 @@ export default class MainLayout extends React.Component {
   render() {
   const {children} = this.props;
   const actions = [];
+  actions.push({ iconClassName: "fa fa-close", children: "Close", onClick: this.closeModal});
+  actions.push({ iconClassName: "fa fa-clipboard", children: 'Copy', tooltipLabel: this.state.modalPath, tooltipPosition: "top", onClick: this.modalOk });
   actions.push({ iconClassName: "fa fa-link", children: 'Visit', onClick: this.modalCancel });
-  actions.push({ iconClassName: "fa fa-clipboard", children: 'Copy', onClick: this.modalOk });
+
     return (
       <Layout>
       <Helmet>
