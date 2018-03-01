@@ -25,6 +25,20 @@ module.exports = {
     "gatsby-plugin-antd",
     "gatsby-plugin-netlify",
     {
+      resolve: "gatsby-source-filesystem",
+      options: {
+          path: `${__dirname}/src/content/categories`,
+          name: 'categories'
+      }
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+          path: `${__dirname}/src/content/items`,
+          name: 'items'
+      }
+    },
+    {
       resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
