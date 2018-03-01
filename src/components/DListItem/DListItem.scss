@@ -1,0 +1,15 @@
+@import "../../layouts/theme.scss";
+
+.hoverable{
+    background-color: $md-tertiary-color;
+    cursor: pointer;
+}
+
+.hoverable:hover{
+  background-color: darken($md-tertiary-color, 10%);
+
+}
+
+.hoverable:active{
+  background-color: darken($md-tertiary-color, 20%);
+}

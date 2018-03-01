@@ -1,0 +1,35 @@
+@import "../layouts/theme.scss";
+
+.ant-tabs-top > .ant-tabs-bar {
+  margin-bottom: 0;
+}
+
+.ant-tabs-bar{
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  background-color: $md-secondary-color;
+}
+
+.ant-tabs-content{
+  width: 100%;
+  margin-top: 43.5px;
+}
+
+.ant-tabs-nav .ant-tabs-tab{
+  @extend .link;
+}
+
+.ant-tabs-nav.ant-tabs-nav-animated{
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.ant-tabs-nav .ant-tabs-tab-active{
+  @extend .link;
+}
+
+.ant-tabs-ink-bar{
+  background-color: $md-link-color;
+}

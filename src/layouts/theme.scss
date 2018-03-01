@@ -1,7 +1,9 @@
 @import '~react-md/src/scss/react-md';
 $md-primary-color: $md-grey-400;
-$md-secondary-color: $md-red-800;
+$md-secondary-color: $md-grey-200;
 $md-tertiary-color: $md-grey-300;
+
+$md-link-color: $md-green-300;
 
 .main-container,
 .darker-background {
@@ -11,4 +13,31 @@ $md-tertiary-color: $md-grey-300;
 a:link {
     color: $md-secondary-color;
     text-decoration: none;
+}
+
+.link{
+  color: $md-link-color;
+}
+
+.link:hover{
+  cursor: pointer;
+  color: darken($md-link-color, 10%);
+}
+
+.link:active{
+  color: darken($md-link-color, 20%);
+}
+
+.bubble{
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 20px;
+
+}
+
+.bubble:hover{
+  background-color: rgba(darken($md-tertiary-color, 10%), 0.3);
+}
+
+.bubble:active{
+  background-color: rgba(darken($md-tertiary-color, 30%), 0.4);
 }

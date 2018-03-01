@@ -1,0 +1,30 @@
+@import '../../layouts/theme.scss';
+
+.title{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header{
+  background-color: $md-tertiary-color;
+  text-align: center;
+  font-size: 2em;
+  position: fixed;
+  width: 100%;
+  padding: 0;
+  z-index: 10;
+}
+
+.icon{
+  float: left;
+  position: absolute;
+  left:10px;
+  color: $md-link-color;
+  height: auto !important;
+  @extend .link, .bubble;
+  padding-bottom: 0;
+}
+
+.md-btn--icon {
+  padding: 0 !important;
+}
