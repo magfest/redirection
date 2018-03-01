@@ -25,14 +25,9 @@ collections: # A list of collections the CMS should be able to edit
         - {label: "Status", name: "status", widget: "select", options: ["200", "301", "303"], default: "200"}
         - {label: "Public", name: "public", widget: "boolean", default: true}
         - {label: "Enabled", name: "enabled", widget: "boolean", default: true}
-        - label: "Categories"
-          name: "Category"
-          widget: "list"
-          required: false
-          field:
-              - label: "Category"
-                name: "category"
-                widget: "relation"
-                collection: "category"
-                searchFields: ["title"]
-                valueField: "name"
+        - label: "Category"
+          name: "category"
+          widget: "relation"
+          collection: "category"
+          searchFields: ["title"]
+          valueField: "title"
