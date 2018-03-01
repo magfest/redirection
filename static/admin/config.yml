@@ -7,12 +7,32 @@ media_folder: static/assets
 public_folder: assets
 
 collections: # A list of collections the CMS should be able to edit
-  - name: "pages"
-    label: "Pages"
-    files:
-      - label: "Resume"
-        name: "resume"
-        file: "site/content/categories/_index.md"
-        fields:
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "About Me", name: "body", widget: "markdown", required: false}
+  - label: "Category"
+    name: "category"
+    folder: "src/content/categories"
+    create: true
+    fields:
+        - {label: "Name", name: "title", widget: "string"}
+  - label: "Item"
+    name: "item"
+    folder: "src/content/items"
+    create: true
+    fields:
+        - {label: "Name", name: "title", widget: "string"}
+        - {label: "Description", name: "body", widget: "markdown", required: false}
+        - {label: "Path", name: "path", widget: "string"}
+        - {label: "URL", name: "url", widget: "string"}
+        - {label: "Status", name: "status", widget: "select", options: ["200", "301", "303"], default: "200"}
+        - {label: "Public", name: "public", widget: "boolean", default: true}
+        - {label: "Enabled", name: "enabled", widget: "boolean", default: true}
+        - label: "Categories"
+          name: "Category"
+          widget: "list"
+          required: false
+          field:
+              - label: "Category"
+                name: "category"
+                widget: "relation"
+                collection: "category"
+                searchFields: ["title"]
+                valueField: "name"
