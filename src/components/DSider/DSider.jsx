@@ -61,7 +61,7 @@ class DSider extends Component{
 
     menuSelect = (item, key, selectedKeys) => {
       const newItem = item.item.props.item;
-      this.props.modal(newItem.Name, this.makeDescription(newItem), window.location.origin + newItem.Path);
+      this.props.modal(newItem.Name, newItem.URL, window.location.origin + newItem.Path, this.makeDescription(newItem));
     }
 
     render(){

@@ -23,6 +23,7 @@ export default class MainLayout extends React.Component {
       modalURL: "http://daredoes.work",
       modalPath: "http://daredoes.work/test",
       modalVisible: false,
+      modalDescription: "",
       closeOnClick: true
     };
   }
@@ -38,12 +39,13 @@ export default class MainLayout extends React.Component {
   }
 
 
-    makeModal = (title, url, bookmark) => {
+    makeModal = (title, url, bookmark, description) => {
       this.setState({
         modalTitle: title,
         modalURL: url,
         modalPath: bookmark,
         modalVisible: true,
+        modalDescription: description
       });
     }
 
@@ -105,7 +107,7 @@ export default class MainLayout extends React.Component {
         height={'100vh'}
         width={'100vw'}
         >
-        { this.state.modalURL}
+        { this.state.modalDescription}
 
         </DialogContainer>
           {children()}
