@@ -17,7 +17,7 @@ class DListItem extends Component{
 
     handleClick = (e) => {
       const new_url = window.location.origin + this.props.item.Path;
-      this.props.modal(this.props.item.Name, this.makeDescription(), new_url);
+      this.props.modal(this.props.item.Name, this.props.item.URL, new_url, this.makeDescription());
     }
 
 
