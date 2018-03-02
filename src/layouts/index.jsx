@@ -24,8 +24,15 @@ export default class MainLayout extends React.Component {
       modalPath: "http://daredoes.work/test",
       modalVisible: false,
       modalDescription: "",
-      closeOnClick: true
+      closeOnClick: true,
+      isCopy: true
     };
+  }
+
+  toggleCopy = () => {
+    this.setState({
+      isCopy: !this.state.isCopy
+    });
   }
 
   toggleSider = () => {
@@ -40,6 +47,20 @@ export default class MainLayout extends React.Component {
 
 
     makeModal = (title, url, bookmark, description) => {
+    if(this.state.isCopy){
+      if(copy(bookmark))
+      {
+        notification.success({
+        message: "URL Copied",
+        description: bookmark
+        });
+      }
+    }
+    else{
+      window.open(url);
+    }
+
+    /*
       this.setState({
         modalTitle: title,
         modalURL: url,
@@ -47,6 +68,7 @@ export default class MainLayout extends React.Component {
         modalVisible: true,
         modalDescription: description
       });
+      */
     }
 
       hide = () => {
@@ -95,7 +117,7 @@ export default class MainLayout extends React.Component {
       { this.state.showSider ? <DSider modal={this.makeModal} categories={this.props.data.categories} items={this.props.data.items} /> : null}
       <Layout className={'page ' + (this.state.closeOnClick && this.state.showSider ? " click" : "")} onClick={this.closeSider} style={{ marginLeft: this.state.showSider ? 200 : 0, height: '100vh'}}>
 
-      <DHeader modal={this.makeModal} popSider={this.toggleSider}>
+      <DHeader modal={this.makeModal} popSider={this.toggleSider} copy={this.state.isCopy} toggleCopy={this.toggleCopy}>
       </DHeader>
         <Content style={{ marginTop: 64 }}>
         <DialogContainer
