@@ -14,8 +14,8 @@ class Index extends React.Component {
 
   makeAllComponents(){
     var all_components = [];
-    this.context.categories.edges.forEach(edge => {
-    const node = this.makeComponentListing(edge.node);
+    this.context.categories.map(edge => {
+    const node = this.makeComponentListing(edge);
     if(node != null){
       all_components.push(node);
       }
@@ -25,15 +25,15 @@ class Index extends React.Component {
 
   makeComponentListing = (category) => {
     var approved_items = [];
-    this.context.items.edges.forEach(edge => {
-      if(edge.node.Category){
-        if(edge.node.Category.indexOf(category.id) >= 0){
-          approved_items.push(edge.node);
+    this.context.items.map(edge => {
+      if(edge.category){
+        if(edge.category.indexOf(category.id) >= 0){
+          approved_items.push(edge);
         }
       }
     });
     if(approved_items.length > 0){
-      return (<TabPane tab={category.Name} key={category.id}>
+      return (<TabPane tab={category.title} key={category.id}>
             <DList category={category} items={approved_items} modal={this.context.modal} />
             </TabPane>)
     }

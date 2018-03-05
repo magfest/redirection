@@ -25,8 +25,62 @@ export default class MainLayout extends React.Component {
       modalVisible: false,
       modalDescription: "",
       closeOnClick: true,
-      isCopy: true
+      isCopy: true,
+      categories: this.makeCategories(),
+      items: this.makeItems()
     };
+  }
+
+  makeCategories = () => {
+    const items = [];
+    if(config.airtable){
+      this.props.data.categories.edges.map(edge => {
+      items.push({
+      title: edge.node.Name,
+      description: edge.node.Description,
+      id: edge.node.id
+      });
+      });
+    }
+    if(config.markdown){
+      this.props.data.markdownCategories.edges.map(edge => {
+        items.push({
+          title: edge.node.frontmatter.title,
+          description: "",
+          id: edge.node.frontmatter.title
+        });
+      });
+    }
+    return items;
+  }
+
+  makeItems = () => {
+    const items = [];
+    if(config.airtable){
+      this.props.data.items.edges.map(edge => {
+        items.push({
+          title: edge.node.Name,
+          description: edge.node.Description,
+          path: edge.node.Path,
+          url: edge.node.URL,
+          category: edge.node.Category
+
+        });
+      });
+    }
+    if(config.markdown){
+      this.props.data.markdownItems.edges.map(edge => {
+        items.push({
+          title: edge.node.frontmatter.title,
+          description: "",
+          path: edge.node.frontmatter.path,
+          url: edge.node.frontmatter.url,
+          public: edge.node.frontmatter.public,
+          category: [edge.node.frontmatter.category]
+        });
+      });
+    }
+    return items;
   }
 
   toggleCopy = () => {
@@ -97,7 +151,7 @@ export default class MainLayout extends React.Component {
   }
 
   getChildContext = () => {
-    return {modal: this.makeModal, items: this.props.data.items, categories: this.props.data.categories};
+    return {modal: this.makeModal, items: this.state.items, categories: this.state.categories};
   }
 
 
@@ -114,7 +168,7 @@ export default class MainLayout extends React.Component {
       <Helmet>
         <meta name="description" content={config.siteDescription} />
       </Helmet>
-      { this.state.showSider ? <DSider modal={this.makeModal} categories={this.props.data.categories} items={this.props.data.items} /> : null}
+      { this.state.showSider ? <DSider modal={this.makeModal} categories={this.state.categories} items={this.state.items} /> : null}
       <Layout className={'page ' + (this.state.closeOnClick && this.state.showSider ? " click" : "")} onClick={this.closeSider} style={{ marginLeft: this.state.showSider ? 200 : 0, height: '100vh'}}>
 
       <DHeader modal={this.makeModal} popSider={this.toggleSider} copy={this.state.isCopy} toggleCopy={this.toggleCopy}>
@@ -174,6 +228,32 @@ export const pageQuery = graphql`
         Category
       }
     }
+  }
+  markdownCategories: allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/content/categories/"}}) {
+    edges {
+      node {
+        frontmatter {
+          title
+        }
+      }
+    }
+    totalCount
+  }
+  markdownItems: allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/content/items/"}}) {
+    edges {
+      node {
+        frontmatter {
+          title
+          path
+          url
+          public
+          enabled
+          status
+          category
+        }
+      }
+    }
+    totalCount
   }
 }
 `;
