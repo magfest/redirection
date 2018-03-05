@@ -1,6 +1,6 @@
 module.exports = {
-  airtable: process.env.AIRTABLE == null ? false : process.env.AIRTABLE,
-  markdown: process.env.MARKDOWN == null ? true : process.env.MARKDOWN,
+  airtable: true,
+  markdown: false,
   blogPostDir: "sample-posts", // The name of directory that contains your posts.
   siteTitle: "Redirection", // Site title.
   siteTitleAlt: "Bookmarks Portal", // Alternative site title for SEO.

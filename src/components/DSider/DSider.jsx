@@ -69,7 +69,7 @@ class DSider extends Component{
     });
     return(
     <Sider style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}>
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={[]} defaultOpenKeys={this.props.categories.map(edge => { return edge.id })}
+      <Menu theme="dark" mode="inline" defaultSelectedKeys={[]} defaultOpenKeys={[]}
       onSelect={this.menuSelect}
       >
         {items}
