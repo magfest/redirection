@@ -23,7 +23,9 @@ module.exports = {
     "gatsby-plugin-sass",
     "gatsby-plugin-antd",
     "gatsby-plugin-netlify",
-    "gatsby-plugin-netlify-cms",
+    {
+      resolve: `gatsby-plugin-netlify-cms`
+    },
     {
       resolve: "gatsby-source-filesystem",
       options: {
