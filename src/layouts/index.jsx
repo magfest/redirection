@@ -12,6 +12,7 @@ import "./index.scss";
 import "./global.scss";
 import {DialogContainer, Button} from 'react-md'
 import copy from 'copy-to-clipboard';
+import { CSSTransition, transit } from "react-css-transition";
 
 export default class MainLayout extends React.Component {
 
@@ -169,7 +170,17 @@ export default class MainLayout extends React.Component {
         <meta name="description" content={config.siteDescription} />
       </Helmet>
       { this.state.showSider ? <DSider modal={this.makeModal} categories={this.state.categories} items={this.state.items} /> : null}
-      <Layout className={'page ' + (this.state.closeOnClick && this.state.showSider ? " click" : "")} onClick={this.closeSider} style={{ marginLeft: this.state.showSider ? 200 : 0, height: '100vh'}}>
+      <CSSTransition
+        defaultStyle={{ "margin-left": 0 }}
+        enterStyle={{ "margin-left": transit(200, 250, "linear")}}
+        leaveStyle={{ "margin-left": transit(0, 250, "linear")}}
+        activeStyle={{ "margin-left": 200 }}
+        active={this.state.showSider}
+
+      >
+      <Layout className={'page ' + (this.state.closeOnClick && this.state.showSider ? " click " : "")} onClick={this.closeSider} style={{ height: '100vh'}}>
+      <Content className={this.state.showSider ? "showCover" : "hideCover"}>
+      </Content>
 
       <DHeader modal={this.makeModal} popSider={this.toggleSider} copy={this.state.isCopy} toggleCopy={this.toggleCopy}>
       </DHeader>
@@ -189,6 +200,7 @@ export default class MainLayout extends React.Component {
           {children()}
         </Content>
         </Layout>
+        </CSSTransition>
       </Layout>
     );
   }
@@ -196,8 +208,8 @@ export default class MainLayout extends React.Component {
 
 MainLayout.childContextTypes = {
   modal: React.PropTypes.func,
-  items: React.PropTypes.object,
-  categories: React.PropTypes.object
+  items: React.PropTypes.array,
+  categories: React.PropTypes.array
 }
 /* eslint no-undef: "off"*/
 export const pageQuery = graphql`

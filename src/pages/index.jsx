@@ -55,8 +55,8 @@ class Index extends React.Component {
 
 Index.contextTypes = {
   modal: React.PropTypes.func,
-  items: React.PropTypes.object,
-  categories: React.PropTypes.object
+  items: React.PropTypes.array,
+  categories: React.PropTypes.array
 }
 
 export default Index;
