@@ -24,9 +24,6 @@ module.exports = {
     "gatsby-plugin-antd",
     "gatsby-plugin-netlify",
     {
-      resolve: `gatsby-plugin-netlify-cms`
-    },
-    {
       resolve: "gatsby-source-filesystem",
       options: {
           path: `${__dirname}/src/content/categories`,
@@ -146,6 +143,9 @@ module.exports = {
         ]
       }
     },
-    "gatsby-plugin-offline"
+    "gatsby-plugin-offline",
+    {
+      resolve: "gatsby-plugin-netlify-cms"
+    }
   ]
 };
