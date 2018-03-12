@@ -2,6 +2,8 @@ const path = require("path");
 const _ = require("lodash");
 const webpackLodashPlugin = require("lodash-webpack-plugin");
 
+const config = require("./data/SiteConfig");
+
 
 exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
   const { createNodeField } = boundActionCreators;
@@ -12,64 +14,131 @@ exports.setFieldsOnGraphQLNodeType = ({ type, boundActionCreators }) => {
   const { createNodeField } = boundActionCreators;
 };
 
+formatMarkdownCategories = (items) => {
+  const newItems = [];
+  items.edges.map(edge => {
+      newItems.push({
+        title: edge.node.frontmatter.title,
+        description: "",
+        id: edge.node.frontmatter.title,
+      });
+  });
+  return newItems;
+};
+
+formatMarkdownItems = (items) => {
+  const newItems = [];
+  items.edges.map(edge => {
+      newItems.push({
+        title: edge.node.frontmatter.title,
+        path: edge.node.frontmatter.path,
+        url: edge.node.frontmatter.url,
+        public: edge.node.frontmatter.public,
+        enabled: edge.node.frontmatter.enabled,
+        status: edge.node.frontmatter.status,
+        category: edge.node.frontmatter.category
+      });
+  });
+  return newItems;
+};
+
+formatAirtableCategories = (items) => {
+  const newItems = [];
+  items.edges.map(edge => {
+    newItems.push({
+      title: edge.node.Name,
+      description: edge.node.Description,
+      id: edge.node.id
+    });
+  });
+  return newItems;
+};
+
+formatAirtableItems = (items) => {
+  const newItems = [];
+  items.edges.map(edge => {
+    newItems.push({
+      path: edge.node.Path,
+      url: edge.node.URL
+    });
+  });
+  return newItems;
+};
+
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage, createRedirect } = boundActionCreators;
+  const createRedirectItem = (func, item) => {
+    if(item.enabled){
+      func({
+        fromPath: item.path,
+        toPath: item.url
+      });
+    }
+  };
 
   return new Promise((resolve, reject) => {
-    //const postPage = path.resolve("src/templates/post.jsx");
-    //const tagPage = path.resolve("src/templates/tag.jsx");
-    const categoryPage = path.resolve("src/templates/category.jsx");
-    resolve(
-      graphql(
-      `
-        {
-          allAirtableCategories{
-            edges{
-              node {
-                id,
-                Name,
-                Description
-
+    if(config.markdown){
+      resolve(
+        graphql(
+          `
+            {
+              items: allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/content/items/"}}) {
+                edges {
+                  node {
+                    frontmatter {
+                      title
+                      path
+                      url
+                      public
+                      enabled
+                      status
+                      category
+                    }
+                  }
+                }
+                totalCount
               }
             }
-          },
-          allAirtableItems{
-            edges{
-              node{
-                Path,
-                URL,
-                Status,
-                Enabled
-              }
-            }
-          }
-        }
-      `
-    ).then(result => {
+          `
+        ).then(result => {
           if (result.errors) {
             reject(result.errors)
           }
-          result.data.allAirtableCategories.edges.map(edge => {
-            createPage({
-              path: `/${_.kebabCase(edge.node.Name)}`,
-              component: categoryPage,
-              context: {
-                Name: edge.node.Name,
-                id: edge.node.id,
-                Description: edge.node.Description
+          formatMarkdownItems(result.data.items).map(item => {
+            createRedirectItem(createRedirect, item);
+          });
+
+        }));
+    }
+    if(config.airtable){
+      resolve(
+        graphql(
+        `
+          {
+            items: allAirtableItems(
+              filter: { Path: {ne: null}}
+            ){
+              edges{
+                node{
+                  Path,
+                  URL,
+                  Status,
+                  Enabled
+                }
               }
-            });
-          });
-          result.data.allAirtableItems.edges.map(edge => {
-            if(edge.node.Enabled){
-              createRedirect({
-                fromPath: edge.node.Path,
-                toPath: edge.node.URL
-              });
             }
-          });
-        })
-    )
+          }
+        `
+      ).then(result => {
+            if (result.errors) {
+              reject(result.errors)
+            }
+            formatAirtableItems(result.data.items).map(item => {
+              createRedirectItem(createRedirect, item);
+            });
+          })
+      );
+    }
   });
 };
 

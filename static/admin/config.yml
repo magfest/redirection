@@ -31,3 +31,4 @@ collections: # A list of collections the CMS should be able to edit
           collection: "category"
           searchFields: ["title"]
           valueField: "title"
+          required: false

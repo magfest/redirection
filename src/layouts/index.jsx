@@ -12,6 +12,8 @@ import "./index.scss";
 import "./global.scss";
 import {DialogContainer, Button} from 'react-md'
 import copy from 'copy-to-clipboard';
+import { CSSTransition, transit } from "react-css-transition";
+import PropTypes from 'prop-types';
 
 export default class MainLayout extends React.Component {
 
@@ -25,8 +27,62 @@ export default class MainLayout extends React.Component {
       modalVisible: false,
       modalDescription: "",
       closeOnClick: true,
-      isCopy: true
+      isCopy: true,
+      categories: this.makeCategories(),
+      items: this.makeItems()
     };
+  }
+
+  makeCategories = () => {
+    const items = [];
+    if(config.airtable){
+      this.props.data.categories.edges.map(edge => {
+      items.push({
+      title: edge.node.Name,
+      description: edge.node.Description,
+      id: edge.node.id
+      });
+      });
+    }
+    if(config.markdown){
+      this.props.data.markdownCategories.edges.map(edge => {
+        items.push({
+          title: edge.node.frontmatter.title,
+          description: "",
+          id: edge.node.frontmatter.title
+        });
+      });
+    }
+    return items;
+  }
+
+  makeItems = () => {
+    const items = [];
+    if(config.airtable){
+      this.props.data.items.edges.map(edge => {
+        items.push({
+          title: edge.node.Name,
+          description: edge.node.Description,
+          path: edge.node.Path,
+          url: edge.node.URL,
+          category: edge.node.Category
+
+        });
+      });
+    }
+    if(config.markdown){
+      this.props.data.markdownItems.edges.map(edge => {
+        items.push({
+          title: edge.node.frontmatter.title,
+          description: "",
+          path: edge.node.frontmatter.path,
+          url: edge.node.frontmatter.url,
+          public: edge.node.frontmatter.public,
+          category: [edge.node.frontmatter.category]
+        });
+      });
+    }
+    return items;
   }
 
   toggleCopy = () => {
@@ -97,7 +153,7 @@ export default class MainLayout extends React.Component {
   }
 
   getChildContext = () => {
-    return {modal: this.makeModal, items: this.props.data.items, categories: this.props.data.categories};
+    return {modal: this.makeModal, items: this.state.items, categories: this.state.categories};
   }
 
 
@@ -114,8 +170,18 @@ export default class MainLayout extends React.Component {
       <Helmet>
         <meta name="description" content={config.siteDescription} />
       </Helmet>
-      { this.state.showSider ? <DSider modal={this.makeModal} categories={this.props.data.categories} items={this.props.data.items} /> : null}
-      <Layout className={'page ' + (this.state.closeOnClick && this.state.showSider ? " click" : "")} onClick={this.closeSider} style={{ marginLeft: this.state.showSider ? 200 : 0, height: '100vh'}}>
+      { this.state.showSider ? <DSider modal={this.makeModal} categories={this.state.categories} items={this.state.items} /> : null}
+      <CSSTransition
+        defaultStyle={{ "margin-left": 0 }}
+        enterStyle={{ "margin-left": transit(200, 250, "linear")}}
+        leaveStyle={{ "margin-left": transit(0, 250, "linear")}}
+        activeStyle={{ "margin-left": 200 }}
+        active={this.state.showSider}
+
+      >
+      <Layout className={'page ' + (this.state.closeOnClick && this.state.showSider ? " click " : "")} onClick={this.closeSider} style={{ height: '100vh'}}>
+      <Content className={this.state.showSider ? "showCover" : "hideCover"}>
+      </Content>
 
       <DHeader modal={this.makeModal} popSider={this.toggleSider} copy={this.state.isCopy} toggleCopy={this.toggleCopy}>
       </DHeader>
@@ -135,15 +201,16 @@ export default class MainLayout extends React.Component {
           {children()}
         </Content>
         </Layout>
+        </CSSTransition>
       </Layout>
     );
   }
 };
 
 MainLayout.childContextTypes = {
-  modal: React.PropTypes.func,
-  items: React.PropTypes.object,
-  categories: React.PropTypes.object
+  modal: PropTypes.func,
+  items: PropTypes.array,
+  categories: PropTypes.array
 }
 /* eslint no-undef: "off"*/
 export const pageQuery = graphql`
@@ -174,6 +241,39 @@ export const pageQuery = graphql`
         Category
       }
     }
+  }
+  markdownCategories: allMarkdownRemark(
+  filter: {fileAbsolutePath: {regex: "/content/categories/"}},
+  sort: { fields: [frontmatter___title], order: ASC }) {
+    edges {
+      node {
+        frontmatter {
+          title
+        }
+      }
+    }
+    totalCount
+  }
+  markdownItems: allMarkdownRemark(
+  filter: {
+  fileAbsolutePath: {regex: "/content/items/"},
+  frontmatter: {public: {eq: true}}
+  },
+  sort: { fields: [frontmatter___title], order: ASC }) {
+    edges {
+      node {
+        frontmatter {
+          title
+          path
+          url
+          public
+          enabled
+          status
+          category
+        }
+      }
+    }
+    totalCount
   }
 }
 `;

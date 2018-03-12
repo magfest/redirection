@@ -12,12 +12,12 @@ class DListItem extends Component{
     }
 
     makeDescription = () => {
-      return (<div>{this.props.item.URL}<br />{this.props.item.Description}</div>);
+      return (<div>{this.props.item.url}<br />{this.props.item.description}</div>);
     }
 
     handleClick = (e) => {
-      const new_url = window.location.origin + this.props.item.Path;
-      this.props.modal(this.props.item.Name, this.props.item.URL, new_url, this.makeDescription());
+      const new_url = window.location.origin + this.props.item.path;
+      this.props.modal(this.props.item.title, this.props.item.url, new_url, this.makeDescription());
     }
 
 
@@ -25,7 +25,7 @@ class DListItem extends Component{
     return(
 
       <List.Item className="hoverable" onClick={this.handleClick}>
-        { this.props.item.Name }
+        { this.props.item.title }
       </List.Item>
 
     );

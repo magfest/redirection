@@ -13,15 +13,16 @@ class DSider extends Component{
     makeAllComponents = () => {
       var all_components = [];
       var approved_homeless_items = [];
-      this.props.categories.edges.forEach(edge => {
-      const node = this.makeComponentListing(edge.node);
+      this.props.categories.map(edge => {
+      const node = this.makeComponentListing(edge);
       if(node != null){
         all_components.push(node);
         }
       });
-      this.props.items.edges.forEach(edge => {
-        if(edge.node.Category == null){
-          approved_homeless_items.push(edge.node);
+      this.props.items.map(edge => {
+
+        if(edge.category == null || edge.category[0] == null){
+          approved_homeless_items.push(edge);
         }
       })
       {approved_homeless_items.map(item => {
@@ -32,16 +33,16 @@ class DSider extends Component{
 
     makeComponentListing = (category) => {
       var approved_items = [];
-      this.props.items.edges.forEach(edge => {
-      if(edge.node.Category){
-        if(edge.node.Category.indexOf(category.id) >= 0){
-          approved_items.push(edge.node);
+      this.props.items.map(edge => {
+      if(edge.category){
+        if(edge.category.indexOf(category.id) >= 0){
+          approved_items.push(edge);
         }
       }
       });
       if(approved_items.length > 0){
         return (
-        <SubMenu title={category.Name} key={category.id}>
+        <SubMenu title={category.title} key={category.id}>
           {approved_items.map(item => {
           return this.makeListing(item);
           })}
@@ -51,17 +52,16 @@ class DSider extends Component{
     }
 
     makeListing(item){
-      return <Menu.Item item={item} key={item.id}>{item.Name}</Menu.Item>;
+      return <Menu.Item item={item} key={item.title}>{item.title}</Menu.Item>;
     }
 
     makeDescription = (item) => {
-    console.log(item);
-      return (<div>{item.URL}<br />{item.Description}</div>);
+      return (<div>{item.url}<br />{item.description}</div>);
     }
 
     menuSelect = (item, key, selectedKeys) => {
       const newItem = item.item.props.item;
-      this.props.modal(newItem.Name, newItem.URL, window.location.origin + newItem.Path, this.makeDescription(newItem));
+      this.props.modal(newItem.title, newItem.url, window.location.origin + newItem.path, this.makeDescription(newItem));
     }
 
     render(){
@@ -70,7 +70,7 @@ class DSider extends Component{
     });
     return(
     <Sider style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}>
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={[]} defaultOpenKeys={this.props.categories.edges.forEach(edge => { return edge.node.id })}
+      <Menu theme="dark" mode="inline" defaultSelectedKeys={[]} defaultOpenKeys={[]}
       onSelect={this.menuSelect}
       >
         {items}
