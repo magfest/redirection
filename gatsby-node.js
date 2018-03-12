@@ -67,13 +67,11 @@ formatAirtableItems = (items) => {
 
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage, createRedirect } = boundActionCreators;
-  const createRedirectItem = (func, item) => {
-    if(item.enabled){
-      func({
+  const createRedirectItem = (item) => {
+      createRedirect({
         fromPath: item.path,
         toPath: item.url
       });
-    }
   };
 
   return new Promise((resolve, reject) => {
@@ -82,7 +80,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         graphql(
           `
             {
-              items: allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/content/items/"}}) {
+              items: allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/content/items/"}, frontmatter: {enabled: {eq: true}}}) {
                 edges {
                   node {
                     frontmatter {
@@ -105,7 +103,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             reject(result.errors)
           }
           formatMarkdownItems(result.data.items).map(item => {
-            createRedirectItem(createRedirect, item);
+            createRedirectItem(item);
           });
 
         }));
@@ -116,7 +114,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         `
           {
             items: allAirtableItems(
-              filter: { Path: {ne: null}}
+              filter: { Path: {ne: null}, Enabled: {eq: true}}
             ){
               edges{
                 node{
@@ -134,7 +132,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               reject(result.errors)
             }
             formatAirtableItems(result.data.items).map(item => {
-              createRedirectItem(createRedirect, item);
+              createRedirectItem(item);
             });
           })
       );
