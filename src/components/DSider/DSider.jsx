@@ -20,7 +20,8 @@ class DSider extends Component{
         }
       });
       this.props.items.map(edge => {
-        if(edge.category == null){
+
+        if(edge.category == null || edge.category[0] == null){
           approved_homeless_items.push(edge);
         }
       })

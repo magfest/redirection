@@ -242,7 +242,9 @@ export const pageQuery = graphql`
       }
     }
   }
-  markdownCategories: allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/content/categories/"}}) {
+  markdownCategories: allMarkdownRemark(
+  filter: {fileAbsolutePath: {regex: "/content/categories/"}},
+  sort: { fields: [frontmatter___title], order: ASC }) {
     edges {
       node {
         frontmatter {
@@ -252,7 +254,12 @@ export const pageQuery = graphql`
     }
     totalCount
   }
-  markdownItems: allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/content/items/"}}) {
+  markdownItems: allMarkdownRemark(
+  filter: {
+  fileAbsolutePath: {regex: "/content/items/"},
+  frontmatter: {public: {eq: true}}
+  },
+  sort: { fields: [frontmatter___title], order: ASC }) {
     edges {
       node {
         frontmatter {
