@@ -5,6 +5,7 @@ import DList from "../components/DList/DList";
 import SEO from "../components/SEO/SEO";
 import config from "../../data/SiteConfig";
 import Link from "gatsby-link";
+import PropTypes from 'prop-types';
 import { Layout, Menu, Breadcrumb, Tabs } from 'antd';
 const { Header, Content, Footer } = Layout;
 const TabPane = Tabs.TabPane;
@@ -54,9 +55,9 @@ class Index extends React.Component {
 }
 
 Index.contextTypes = {
-  modal: React.PropTypes.func,
-  items: React.PropTypes.array,
-  categories: React.PropTypes.array
+  modal: PropTypes.func,
+  items: PropTypes.array,
+  categories: PropTypes.array
 }
 
 export default Index;

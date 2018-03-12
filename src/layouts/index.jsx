@@ -13,6 +13,7 @@ import "./global.scss";
 import {DialogContainer, Button} from 'react-md'
 import copy from 'copy-to-clipboard';
 import { CSSTransition, transit } from "react-css-transition";
+import PropTypes from 'prop-types';
 
 export default class MainLayout extends React.Component {
 
@@ -207,9 +208,9 @@ export default class MainLayout extends React.Component {
 };
 
 MainLayout.childContextTypes = {
-  modal: React.PropTypes.func,
-  items: React.PropTypes.array,
-  categories: React.PropTypes.array
+  modal: PropTypes.func,
+  items: PropTypes.array,
+  categories: PropTypes.array
 }
 /* eslint no-undef: "off"*/
 export const pageQuery = graphql`
