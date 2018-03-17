@@ -1,6 +1,6 @@
 module.exports = {
-  airtable: true,
-  markdown: false,
+  airtable: false,
+  markdown: true,
   blogPostDir: "sample-posts", // The name of directory that contains your posts.
   siteTitle: "Redirection", // Site title.
   siteTitleAlt: "Bookmarks Portal", // Alternative site title for SEO.
