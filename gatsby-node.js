@@ -25,6 +25,25 @@ outputJSON = (publicFolder) => {
   writeJsonSync(publicFolder, data_json, {spaces: '\t'});
 };
 
+createJSON = (items, categories) => {
+  finalJson = {}
+  noCategory = [];
+  categories.map((item) => {
+    finalJson[item.title] = [];
+  });
+  items.map((item) => {
+    if(finalJson[item.category]){
+      finalJson[item.category].push(item);
+    }
+    else{
+      noCategory.push(item);
+    }
+  });
+  finalJson['No Category'] = noCategory;
+  finalJson['All'] = finalJson;
+  data_json = finalJson;
+};
+
 formatMarkdownCategories = (items) => {
   const newItems = [];
   items.edges.map(edge => {
@@ -36,6 +55,7 @@ formatMarkdownCategories = (items) => {
   });
   return newItems;
 };
+
 
 formatMarkdownItems = (items) => {
   const newItems = [];
@@ -124,12 +144,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             reject(result.errors)
           }
           formatMarkdownItems(result.data.items).map(item => {
-            data_json['items'].push(item);
             createRedirectItem(item);
           });
-          formatMarkdownCategories(result.data.categories).map(item => {
-            data_json['categories'].push(item);
-          });
+          createJSON(result.data.items, result.data.categories);
 
         }));
     }
