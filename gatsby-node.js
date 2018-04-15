@@ -42,8 +42,9 @@ createJSON = (items, categories) => {
     }
   });
   for(var key in finalJson){
-    if(finalJson[key].length == 0)}
-    delete finalJson[key];
+    if(finalJson[key].length == 0){
+      delete finalJson[key];
+    }
   }
   finalJson['No Category'] = noCategory;
   finalJson['All'] = finalJson;
