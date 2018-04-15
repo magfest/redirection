@@ -49,6 +49,7 @@ createJSON = (items, categories) => {
   finalJson['No Category'] = noCategory;
   finalJson['All'] = Object.assign({}, finalJson);
   data_json = finalJson;
+  console.debug(finalJson);
 };
 
 formatMarkdownCategories = (items) => {
@@ -153,7 +154,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           formatMarkdownItems(result.data.items).map(item => {
             createRedirectItem(item);
           });
-          createJSON(result.data.items.edges, result.data.categories.edges);
+          createJSON(formatMarkdownItems(result.data.items), formatMarkdownCategories(result.data.categories));
 
         }));
     }
