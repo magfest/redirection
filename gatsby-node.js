@@ -47,7 +47,7 @@ createJSON = (items, categories) => {
     }
   }
   finalJson['No Category'] = noCategory;
-  finalJson['All'] = finalJson;
+  finalJson['All'] = Object.assign({}, finalJson);
   data_json = finalJson;
 };
 
