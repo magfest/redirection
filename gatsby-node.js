@@ -32,13 +32,19 @@ createJSON = (items, categories) => {
     finalJson[item.title] = [];
   });
   items.map((item) => {
-    if(finalJson[item.category]){
-      finalJson[item.category].push(item);
-    }
-    else{
-      noCategory.push(item);
+    if(item.public && item.enabled){
+      if(finalJson[item.category]){
+        finalJson[item.category].push(item);
+      }
+      else{
+        noCategory.push(item);
+      }
     }
   });
+  for(var key in finalJson){
+    if(finalJson[key].length == 0)}
+    delete finalJson[key];
+  }
   finalJson['No Category'] = noCategory;
   finalJson['All'] = finalJson;
   data_json = finalJson;
