@@ -47,9 +47,8 @@ createJSON = (items, categories) => {
     }
   }
   finalJson['No Category'] = noCategory;
-  finalJson['All'] = Object.assign({}, finalJson);
+  //finalJson['All'] = Object.assign({}, finalJson);
   data_json = finalJson;
-  console.debug(finalJson);
 };
 
 formatMarkdownCategories = (items) => {
