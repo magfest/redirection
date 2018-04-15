@@ -146,7 +146,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           formatMarkdownItems(result.data.items).map(item => {
             createRedirectItem(item);
           });
-          createJSON(result.data.items, result.data.categories);
+          createJSON(result.data.items.edges, result.data.categories.edges);
 
         }));
     }
