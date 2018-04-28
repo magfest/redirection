@@ -80,29 +80,6 @@ formatMarkdownItems = (items) => {
   return newItems;
 };
 
-formatAirtableCategories = (items) => {
-  const newItems = [];
-  items.edges.map(edge => {
-    newItems.push({
-      title: edge.node.Name,
-      description: edge.node.Description,
-      id: edge.node.id
-    });
-  });
-  return newItems;
-};
-
-formatAirtableItems = (items) => {
-  const newItems = [];
-  items.edges.map(edge => {
-    newItems.push({
-      path: edge.node.Path,
-      url: edge.node.URL
-    });
-  });
-  return newItems;
-};
-
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage, createRedirect } = boundActionCreators;
   const createRedirectItem = (item) => {
@@ -156,35 +133,6 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           createJSON(formatMarkdownItems(result.data.items), formatMarkdownCategories(result.data.categories));
 
         }));
-    }
-    if(config.airtable){
-      resolve(
-        graphql(
-        `
-          {
-            items: allAirtableItems(
-              filter: { Path: {ne: null}, Enabled: {eq: true}}
-            ){
-              edges{
-                node{
-                  Path,
-                  URL,
-                  Status,
-                  Enabled
-                }
-              }
-            }
-          }
-        `
-      ).then(result => {
-            if (result.errors) {
-              reject(result.errors)
-            }
-            formatAirtableItems(result.data.items).map(item => {
-              createRedirectItem(item);
-            });
-          })
-      );
     }
   });
 };
