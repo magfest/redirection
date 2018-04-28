@@ -57,26 +57,6 @@ module.exports = {
       }
     },
     {
-      resolve: "gatsby-source-airtable",
-      options: {
-        apiKey: process.env.AIRTABLE_API_KEY,
-        baseId: process.env.AIRTABLE_BASE_ID,
-        tableName: "ITEMS",
-        tableView: "Grid view",
-        queryName: "Items"
-      }
-    },
-    {
-      resolve: "gatsby-source-airtable",
-      options: {
-        apiKey: process.env.AIRTABLE_API_KEY,
-        baseId: process.env.AIRTABLE_BASE_ID,
-        tableName: "CATEGORIES",
-        tableView: "Grid view",
-        queryName: "Categories"
-      }
-    },
-    {
       resolve: "gatsby-plugin-google-analytics",
       options: {
         trackingId: config.siteGATrackingID

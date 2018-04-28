@@ -35,15 +35,6 @@ export default class MainLayout extends React.Component {
 
   makeCategories = () => {
     const items = [];
-    if(config.airtable){
-      this.props.data.categories.edges.map(edge => {
-      items.push({
-      title: edge.node.Name,
-      description: edge.node.Description,
-      id: edge.node.id
-      });
-      });
-    }
     if(config.markdown){
       this.props.data.markdownCategories.edges.map(edge => {
         items.push({
@@ -58,18 +49,6 @@ export default class MainLayout extends React.Component {
 
   makeItems = () => {
     const items = [];
-    if(config.airtable){
-      this.props.data.items.edges.map(edge => {
-        items.push({
-          title: edge.node.Name,
-          description: edge.node.Description,
-          path: edge.node.Path,
-          url: edge.node.URL,
-          category: edge.node.Category
-
-        });
-      });
-    }
     if(config.markdown){
       this.props.data.markdownItems.edges.map(edge => {
         items.push({
@@ -215,65 +194,38 @@ MainLayout.childContextTypes = {
 /* eslint no-undef: "off"*/
 export const pageQuery = graphql`
   query IndexLayoutQuery {
-  categories: allAirtableCategories(
-    sort: { fields: [Name], order: ASC }
-  ) {
-    edges {
-      node {
-        id,
-        Name,
-        Description
-      }
-    }
-  },
-  items: allAirtableItems(
-  sort: { fields: [Name], order: ASC },
-  filter: { Public: {eq: true}}
-  ){
-    edges{
-      node{
-        id,
-        Name,
-        Enabled,
-        URL,
-        Path,
-        Description,
-        Category
-      }
-    }
-  }
-  markdownCategories: allMarkdownRemark(
-  filter: {fileAbsolutePath: {regex: "/content/categories/"}},
-  sort: { fields: [frontmatter___title], order: ASC }) {
-    edges {
-      node {
-        frontmatter {
-          title
+    markdownCategories: allMarkdownRemark(
+    filter: {fileAbsolutePath: {regex: "/content/categories/"}},
+    sort: { fields: [frontmatter___title], order: ASC }) {
+      edges {
+        node {
+          frontmatter {
+            title
+          }
         }
       }
+      totalCount
     }
-    totalCount
-  }
-  markdownItems: allMarkdownRemark(
-  filter: {
-  fileAbsolutePath: {regex: "/content/items/"},
-  frontmatter: {public: {eq: true}}
-  },
-  sort: { fields: [frontmatter___title], order: ASC }) {
-    edges {
-      node {
-        frontmatter {
-          title
-          path
-          url
-          public
-          enabled
-          status
-          category
+    markdownItems: allMarkdownRemark(
+    filter: {
+    fileAbsolutePath: {regex: "/content/items/"},
+    frontmatter: {public: {eq: true}}
+    },
+    sort: { fields: [frontmatter___title], order: ASC }) {
+      edges {
+        node {
+          frontmatter {
+            title
+            path
+            url
+            public
+            enabled
+            status
+            category
+          }
         }
       }
+      totalCount
     }
-    totalCount
   }
-}
 `;
